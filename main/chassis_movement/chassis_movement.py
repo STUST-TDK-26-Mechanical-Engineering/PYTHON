@@ -9,6 +9,7 @@ class control():
         self.bps = bps
         self.packet = bytearray()
         self.z_data=0
+        self.ser = serial.Serial(self.portx, self.bps)
     def coding(self,X=0,Y=0,Z=0):
         packet = bytearray() #創一個空的陣列 類型是bytearray
         # X=0
@@ -70,14 +71,13 @@ class control():
         return result
     
     def res(self):
-        if __name__ == "__main__":
-            a=0
-            f = open('test.txt','w') 
-            while self.ser.isOpen():
-                num = self.ser.inWaiting()   #查询串口接收字节数据，非阻塞
-                if num:
-                    line = self.ser.read(num)  
-                    self.online() 
+        a=0
+        f = open('test.txt','w') 
+        while self.ser.isOpen():
+            num = self.ser.inWaiting()   #查询串口接收字节数据，非阻塞
+            if num:
+                line = self.ser.read(num)  
+                self.online() 
                     
     def res2(self):
         while 1:
@@ -91,7 +91,7 @@ class control():
 
             print(round(self.pid.output),"////",z,"///",self.Angle[2])
             self.online()                          
-    def run(self):
+    def go(self):
         self.ser = serial.Serial(self.portx, self.bps)
         t = threading.Thread(target = self.res)
         t.start()
@@ -108,6 +108,6 @@ class control():
         #     self.play(Z=int(output),X=500,s=0.2)
            
              
-bot=control("COM7",115200)
-bot.run()
-bot.play(X=500,Z=0,s=3)
+# bot=control("COM7",115200)
+# bot.run()
+# bot.play(X=500,Z=0,s=3)
