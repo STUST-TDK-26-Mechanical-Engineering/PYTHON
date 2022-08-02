@@ -1,12 +1,11 @@
 from paho.mqtt import client as mqtt_client
-from chassis_movement import control 
 import random
 import time
-import threading
 import json
+
 broker = 'r201_nx.local'
 port = 1883
-topic = "/bot/chassis"
+topic = "/bot/log"
 client_id = f'python-mqtt-{random.randint(0, 1000)}'
 
 def connect_mqtt():#連接伺服器
@@ -27,23 +26,39 @@ def subscribe(client: mqtt_client):#訂閱
         m_in=json.loads(msg.payload.decode()) #decode json data
         print(m_in)
         if(m_in['msg']=="control.play"):
-            bot.play(m_in['X'],m_in['Y'],m_in['Z'],m_in['s'])
+            # bot.play(m_in['X'],m_in['Y'],m_in['Z'],m_in['s'])
             print(m_in['X'],m_in['Y'],m_in['Z'],m_in['s'])
-        elif(m_in['msg']=="log.play"):
-            bot.play(m_in['X'],m_in['Y'],m_in['Z'],m_in['S'])    
     client.subscribe(topic)
-    client.on_message = on_message
+    client.on_message = on_message  
+def publish(client):#發送訊息
+    msg_count = 0
+    while True:
+        time.sleep(0.1)
+        brokers_out={"msg": "control.log.play",
+                    "X":0,
+                    "Y":0,
+                    "Z":1500,
+                    "s":0.1
+                    }
 
-def run():
-   
+        data_out=json.dumps(brokers_out) # encode object to JSON
+        msg = data_out
+        result = client.publish(topic, msg)
+        # result: [0, 1]
+        status = result[0]
+        if status == 0:
+            print(f"Send `{msg}` to topic `{topic}`")
+        else:
+            print(f"Failed to send message to topic {topic}")
+        msg_count += 1    
     
+def run():
+
+
     client = connect_mqtt()
-    subscribe(client)
-    client.loop_forever()
+    publish(client)
+   
 
 
 if __name__ == '__main__':
-    bot=control("COM7",115200)
-    loop= threading.Thread(target = bot.res)
-    loop.start()
     run()
