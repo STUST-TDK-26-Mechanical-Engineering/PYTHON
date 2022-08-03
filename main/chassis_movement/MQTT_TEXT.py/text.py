@@ -31,26 +31,32 @@ def subscribe(client: mqtt_client):#訂閱
     client.subscribe(topic)
     client.on_message = on_message  
 def publish(client):#發送訊息
-    msg_count = 0
-    while True:
-        time.sleep(0.1)
-        brokers_out={"msg": "control.log.play",
-                    "X":0,
-                    "Y":0,
-                    "Z":1500,
-                    "s":0.1
-                    }
-
-        data_out=json.dumps(brokers_out) # encode object to JSON
+    
+    brokers_out={"msg": "control.log.play",
+                "X":500,
+                "Y":0,
+                "Z":0,
+                "s":2
+                }
+    brokers_out2={"msg": "control.log.play",
+                "X":-500,
+                "Y":0,
+                "Z":0,
+                "s":2
+                }
+    for x in range(1,10):
+        if x%2:
+            data_out=json.dumps(brokers_out2) # encode object to JSON
+        else:
+            data_out=json.dumps(brokers_out) # encode object to JSON    
         msg = data_out
         result = client.publish(topic, msg)
-        # result: [0, 1]
         status = result[0]
         if status == 0:
             print(f"Send `{msg}` to topic `{topic}`")
         else:
             print(f"Failed to send message to topic {topic}")
-        msg_count += 1    
+            
     
 def run():
 
