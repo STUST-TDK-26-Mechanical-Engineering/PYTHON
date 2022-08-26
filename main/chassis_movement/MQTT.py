@@ -43,7 +43,7 @@ def run():
 
 
 if __name__ == '__main__':
-    bot=control("COM7",115200)
+    bot=control("/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0",115200)
     loop= threading.Thread(target = bot.res)
     loop.start()
     run()
