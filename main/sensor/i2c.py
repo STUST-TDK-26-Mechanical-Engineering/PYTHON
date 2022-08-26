@@ -16,6 +16,6 @@ while 1:
     #bus.pec = 1  # Enable PEC
     time.sleep(0.5)
     # i2c_bus.write_byte(ARDUINO_ADDR, a)
-    i2c_bus.write_i2c_block_data(ARDUINO_ADDR,0x01, 1)
+    i2c_bus.write_i2c_block_data(ARDUINO_ADDR,0x01,[0x10,0x19])
     # b = i2c_bus.read_byte_data(ARDUINO_ADDR, 1)
     # print(b)
