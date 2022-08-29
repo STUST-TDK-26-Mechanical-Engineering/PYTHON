@@ -23,7 +23,7 @@ void loop() {
 void receiveEvent(int bytes) {
   // Read the first byte to determine which register is concerned
   opcode = Wire.read();
-  Serial.println(opcode);
+  // Serial.println(opcode);
   // If there are more than 1 byte, then the master is writing to the slave
   if (bytes > 1) {
     if (opcode == REGISTER_SPEED) {
