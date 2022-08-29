@@ -28,6 +28,8 @@ void receiveEvent(int bytes) {
   if (bytes > 1) {
     if (opcode == REGISTER_SPEED) {
       speed = Wire.read();
+      Serial.println(speed);
+      Serial.println("0x01");
     } else if (opcode == REGISTER_POWER) {
       speed = (Wire.read() == 1) ? 200 /* on */ : 0 /* off */;
     }
