@@ -1,5 +1,5 @@
 from re import S, X
-import struct
+# import struct
 import time
 import serial
 import threading
@@ -71,8 +71,8 @@ class control():
         return result
     
     def res(self):
-        a=0
-        f = open('test.txt','w') 
+        # a=0
+        # f = open('test.txt','w') 
         while self.ser.isOpen():
             num = self.ser.inWaiting()   #查询串口接收字节数据，非阻塞
             if num:
@@ -95,19 +95,14 @@ class control():
         self.ser = serial.Serial(self.portx, self.bps)
         t = threading.Thread(target = self.res)
         t.start()
-        # self.play(X=500,Z=0,s=1)
-        # time.sleep(5)
-        # self.play(X=-500,Z=0,s=1)
-        # self.play(X=-500,s=3)
-        # self.play(Y=500,s=3)
-        # self.play(Y=-500,s=3)
-        # while 1:
-        # while 1:
-
-        #     output=round(self.pid.output)
-        #     self.play(Z=int(output),X=500,s=0.2)
            
-             
-# bot=control("COM7",115200)
-# bot.run()
-# bot.play(X=500,Z=0,s=3)
+# bot=control("/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0",115200)
+# bot=control("/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0",115200)
+
+  
+# loop= threading.Thread(target = bot.res)
+# loop.start()
+# bot.play(X=0,Z=0,s=3)
+# while 1:
+#     bot.play(X=500,Z=0,s=3)
+#     bot.play(X=-500,Z=0,s=3)

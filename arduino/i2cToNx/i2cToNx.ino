@@ -42,6 +42,7 @@ void requestEvent() {
   if (opcode == REGISTER_SPEED) {
     Wire.write((uint8_t *)&speed, sizeof(speed));
   } else {
-    Wire.write(3);
+    delay(5000);
+    // Wire.write(3);
   }
 }
