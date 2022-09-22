@@ -3,7 +3,7 @@
 uint8_t opcode; // register
 uint8_t speed;  // fan speed: 0=off, 150=low, 200=medium, 250=high
 #define FAN_DC_MOTOR_PIN 3
-#define  I2C_ADDRESS 0x42
+#define  I2C_ADDRESS 0x42 //主機位置
 #define REGISTER_POWER 0x01
 #define REGISTER_SPEED 0x02
 void setup() {
@@ -16,7 +16,7 @@ void setup() {
 
 void loop() {
   // Move the DC motor at a given speed
-  analogWrite(FAN_DC_MOTOR_PIN, speed);
+  // analogWrite(FAN_DC_MOTOR_PIN, speed);
   delay(1000);
 }
 
