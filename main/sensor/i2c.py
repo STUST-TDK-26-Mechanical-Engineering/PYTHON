@@ -17,13 +17,13 @@ class master:
         self.ARDUINO_ADDR = 0x42
         self.I2C_BUS_NO = 8
         self.i2c_bus = SMBus(I2C_BUS_NO)
-    def send_test(self,mode):
+    def send_test(self,mode,data=0):
 
         try:
             #bus.pec = 1  # Enable PEC
             time.sleep(0.5)
             # i2c_bus.write_byte(ARDUINO_ADDR, a)
-            self.i2c_bus.write_i2c_block_data(self.ARDUINO_ADDR,mode,[0xff])
+            self.i2c_bus.write_i2c_block_data(self.ARDUINO_ADDR,mode,[data])
             # print("1")
             b = self.i2c_bus.read_byte_data(self.ARDUINO_ADDR,0x01)
             print(b)
