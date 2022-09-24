@@ -28,12 +28,13 @@ def subscribe(client: mqtt_client):#訂閱
         print(m_in["msg"])
         
         if m_in["msg"]=="i2c.test":
-            match( m_in["msg"]):
-                case("0x01"):
-                    i2c.send_test(0x01)
-        elif m_in["msg"]=="i2c.test":
-            i2c.send_test(0x02)     
-
+            mode=m_in["mode"] 
+            if mode == "0x01":
+                i2c.send_test(0x01)
+            elif mode=="0x02":
+                i2c.send_test(0x02)     
+            elif mode=="0x03":
+                i2c.send_test(0x03,m_in["mode"])    
             
     client.subscribe(topic)
     client.on_message = on_message
