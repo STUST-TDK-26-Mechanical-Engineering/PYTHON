@@ -37,7 +37,7 @@ def subscribe(client: mqtt_client):#訂閱
                 i2c.send_test(0x03,m_in["data"]) 
             elif mode=="0x04":
                 i2c.send_test(0x04,m_in["data"])
-            elif mode=="0x04":
+            elif mode=="0x05":
                 i2c.send_test(0x05)          
             
     client.subscribe(topic)
