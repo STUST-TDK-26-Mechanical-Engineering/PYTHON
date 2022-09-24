@@ -26,8 +26,10 @@ def subscribe(client: mqtt_client):#訂閱
         print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
         m_in=json.loads(msg.payload.decode()) #decode json data
         print(m_in["msg"])
-        if m_in["msg"]=="i2c.test":
-            i2c.send_test()
+        if m_in["msg"]=="i2c.test.1":
+            i2c.send_test(0x01)
+        elif m_in["msg"]=="i2c.test.0":
+            i2c.send_test(0x02)     
 
             
     client.subscribe(topic)

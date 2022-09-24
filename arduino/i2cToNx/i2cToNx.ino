@@ -36,7 +36,8 @@ void receiveEvent(int bytes) {
 
 void requestEvent() {
   // Read from the register variable to know what to send back
-  
+  Serial.print("Event");
+  // Serial.print(sizeof(speed));
   if (opcode == REGISTER_SPEED) {
     Wire.write((uint8_t *)&speed, sizeof(speed));
   } else {
