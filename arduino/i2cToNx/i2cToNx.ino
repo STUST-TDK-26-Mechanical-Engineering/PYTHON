@@ -15,21 +15,19 @@ void setup() {
 }
 
 void loop() {
-  // Move the DC motor at a given speed
-  // analogWrite(FAN_DC_MOTOR_PIN, speed);
-  delay(1000);
+
 }
 
 void receiveEvent(int bytes) {
-  // Read the first byte to determine which register is concerned
+  //讀取第一個字節以確定涉及哪個寄存器
   opcode = Wire.read();
   // Serial.println(opcode);
-  // If there are more than 1 byte, then the master is writing to the slave
+  // 如果超過 1 個字節，則主機正在寫入從機
   if (bytes > 1) {
     if (opcode == REGISTER_SPEED) {
       speed = Wire.read();
       Serial.println(speed);
-      Serial.println("0x01");
+      Serial.println(opcode);
     } else if (opcode == REGISTER_POWER) {
       speed = (Wire.read() == 1) ? 200 /* on */ : 0 /* off */;
     }

@@ -7,7 +7,7 @@ from File_operations import log
 broker = 'r201_nx.local'
 port = 1883
 topic = "/bot/log"
-client_id = f'python-mqtt-{random.randint(0, 1000)}'
+client_id = f'log-{random.randint(0, 1000)}'
 File_log=log()
 
 # 当代理响应订阅请求时被调用。
