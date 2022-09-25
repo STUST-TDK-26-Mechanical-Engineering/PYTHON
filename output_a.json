@@ -8,64 +8,7 @@
          "Z": 0,
          "S": 8
       }
-   ],
-   [
-      1,
-      {
-         "msg": "i2c.test",
-         "mode":"0x01",
-         "S": 3
-      }
-   ],
-   [
-      1,
-      {
-         "msg": "pitching.play",
-         "mode":"0x02",
-         "S": 2
-      }
-   ],
-   [
-      1,
-      {
-         "msg": "pitching.play",
-         "mode":"0x01",
-         "S": 1
-      }
-   ],
-   [
-      1,
-      {
-         "msg": "i2c.test",
-         "mode":"0x01",
-         "S": 2
-      }
-   ],
-   [
-      1,
-      {
-         "msg": "i2c.test",
-         "mode":"0x02",
-         "S": 3
-      }
-   ],
-   [
-      1,
-      {
-         "msg": "i2c.test",
-         "mode":"0x01",
-         "S": 3
-      }
-   ],
-   [
-      1,
-      {
-         "msg": "i2c.test",
-         "mode":"0x02",
-         "S": 3
-      }
-   ],
-   [
+   ],[
       0,
       {
          "msg": "log.play",

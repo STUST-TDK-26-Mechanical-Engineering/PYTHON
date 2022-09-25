@@ -1,14 +1,12 @@
 from paho.mqtt import client as mqtt_client
-from i2c import master
 import random
-import time
-import threading
 import json
+from PitchingSerial import main
 broker = 'r201_nx.local'
 port = 1883
-topic = "/bot/sensor"
-client_id = f'sensor-{random.randint(0, 1000)}'
-i2c=master()
+topic = "/bot/pitching"
+client_id = f'pitching-{random.randint(0, 1000)}'
+pitching=main()
 def connect_mqtt():#連接伺服器
     def on_connect(client, userdata, flags, rc):
         if rc == 0:
@@ -27,18 +25,14 @@ def subscribe(client: mqtt_client):#訂閱
         m_in=json.loads(msg.payload.decode()) #decode json data
         print(m_in["msg"])
         
-        if m_in["msg"]=="i2c.test":
-            mode=m_in["mode"] 
-            if mode == "0x01":
-                i2c.send_test(0x01)
-            elif mode=="0x02":
-                i2c.send_test(0x02)  
-            elif mode=="0x03":
-                i2c.send_test(0x03,m_in["data"]) 
-            elif mode=="0x04":
-                i2c.send_test(0x04,m_in["data"])
-            elif mode=="0x05":
-                i2c.send_test(0x05)          
+        if m_in["msg"]=="pitching.play":
+            if m_in["mode"]=="0x01":
+                pitching.origin()
+            elif m_in["mode"]=="0x02":
+                pitching.run_90_degrees()    
+
+
+                   
             
     client.subscribe(topic)
     client.on_message = on_message
