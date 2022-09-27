@@ -14,7 +14,7 @@ class log:
         print(type(self.data))
         list1=[self.counter, {'msg':"log.play",'X': X, 'Y': Y, 'Z': Z, 'S': S}]
         self.data.append(list1)
-        with open('./output.json', 'w') as f:
+        with open('./text.json', 'w') as f:
             json.dump(self.data, f ,indent = 3)
         self.counter+=1    
         

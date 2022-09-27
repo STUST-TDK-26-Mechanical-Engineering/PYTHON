@@ -1,13 +1,6 @@
 [
    
    [
-      0,
-      {
-         "msg": "i2c.test",
-         "mode":"0x02",
-         "S": 1
-      }
-   ],[
       1,
       {
          "msg": "log.play",
@@ -15,111 +8,6 @@
          "Y": 0,
          "Z": 0,
          "S": 8
-      }
-   ],
-   [
-      2,
-      {
-         "msg": "i2c.test",
-         "mode":"0x01",
-         "S": 3
-      }
-   ],
-   [
-      3,
-      {
-         "msg": "pitching.play",
-         "mode":"0x02",
-         "S": 2
-      }
-   ],
-   [
-      4,
-      {
-         "msg": "pitching.play",
-         "mode":"0x01",
-         "S": 1
-      }
-   ],
-   [
-      5,
-      {
-         "msg": "i2c.test",
-         "mode":"0x02",
-         "S": 2
-      }
-   ],
-   [
-      6,
-      {
-         "msg": "i2c.test",
-         "mode":"0x01",
-         "S": 3
-      }
-   ],
-   [
-      7,
-      {
-         "msg": "pitching.play",
-         "mode":"0x02",
-         "S": 2
-      }
-   ],
-   [
-      8,
-      {
-         "msg": "pitching.play",
-         "mode":"0x01",
-         "S": 1
-      }
-   ],
-   [
-      9,
-      {
-         "msg": "i2c.test",
-         "mode":"0x02",
-         "S": 3
-      }
-   ],[
-      10,
-      {
-         "msg": "i2c.test",
-         "mode":"0x01",
-         "S": 3
-      }
-   ],
-   [
-      11,
-      {
-         "msg": "pitching.play",
-         "mode":"0x02",
-         "S": 2
-      }
-   ],
-   [
-      12,
-      {
-         "msg": "pitching.play",
-         "mode":"0x01",
-         "S": 1
-      }
-   ],
-   [
-      13,
-      {
-         "msg": "i2c.test",
-         "mode":"0x02",
-         "S": 3
-      }
-   ],
-   [
-      0,
-      {
-         "msg": "log.play",
-         "X": 0,
-         "Y": 0,
-         "Z": 0,
-         "S": 0.5
       }
    ],
    [
@@ -202,12 +90,133 @@
       6,
       {
          "msg": "log.play",
-         "X": -100,
-         "Y": -25,
+         "X": -130,
+         "Y": 0,
          "Z": 0,
          "S": 2
       }
    ],[
+      0,
+      {
+         "msg": "log.play",
+         "X": 0,
+         "Y": 0,
+         "Z": 0,
+         "S": 0.5
+      }
+   ],
+   [
+      1,
+      {
+         "msg": "i2c.test",
+         "mode":"0x03",
+         "data":200,
+         "S": 3
+      }
+   ],[
+      0,
+      {
+         "msg": "i2c.test",
+         "mode":"0x02",
+         "S": 1
+      }
+   ],
+   [
+      2,
+      {
+         "msg": "i2c.test",
+         "mode":"0x01",
+         "S": 5
+      }
+   ],
+   [
+      3,
+      {
+         "msg": "pitching.play",
+         "mode":"0x02",
+         "S": 2
+      }
+   ],
+   [
+      4,
+      {
+         "msg": "pitching.play",
+         "mode":"0x01",
+         "S": 1
+      }
+   ],
+   [
+      5,
+      {
+         "msg": "i2c.test",
+         "mode":"0x02",
+         "S": 2
+      }
+   ],
+   [
+      6,
+      {
+         "msg": "i2c.test",
+         "mode":"0x01",
+         "S": 5
+      }
+   ],
+   [
+      7,
+      {
+         "msg": "pitching.play",
+         "mode":"0x02",
+         "S": 2
+      }
+   ],
+   [
+      8,
+      {
+         "msg": "pitching.play",
+         "mode":"0x01",
+         "S": 1
+      }
+   ],
+   [
+      9,
+      {
+         "msg": "i2c.test",
+         "mode":"0x02",
+         "S": 5
+      }
+   ],[
+      10,
+      {
+         "msg": "i2c.test",
+         "mode":"0x01",
+         "S": 5
+      }
+   ],
+   [
+      11,
+      {
+         "msg": "pitching.play",
+         "mode":"0x02",
+         "S": 2
+      }
+   ],
+   [
+      12,
+      {
+         "msg": "pitching.play",
+         "mode":"0x01",
+         "S": 1
+      }
+   ],
+   [
+      13,
+      {
+         "msg": "i2c.test",
+         "mode":"0x02",
+         "S": 3
+      }
+   ],
+   [
       0,
       {
          "msg": "log.play",
@@ -347,23 +356,7 @@
          "Z": 0,
          "S": 0.5
       }
-   ],[
-      14,
-      {
-         "msg": "log.play",
-         "X": -500,
-         "Y": 0,
-         "Z": -100,
-         "S": 1
-      }
-   ],[
-      0,
-      {
-         "msg": "log.play",
-         "X": 0,
-         "Y": 0,
-         "Z": 0,
-         "S": 0.5
-      }
-   ]
+   ],[0,{ "msg": "log.play","X": -500,"Y":0,"Z": -50, "S": 2} ],
+   [0,{ "msg": "log.play","X": 0,"Y":-500,"Z":0 , "S": 5} ],
+   [1,{ "msg": "log.play","X": -225,"Y":0,"Z":-125 , "S": 2} ]
 ]
