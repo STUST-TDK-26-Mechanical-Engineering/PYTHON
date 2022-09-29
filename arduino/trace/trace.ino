@@ -1,6 +1,6 @@
 #include <AutoPID.h>
 #include <Wire.h>
-#define  I2C_ADDRESS 0x28 //主機位置
+#define  I2C_ADDRESS 0x50 //主機位置
 #define DO1 5
 #define DO2 4
 #define DO3 3

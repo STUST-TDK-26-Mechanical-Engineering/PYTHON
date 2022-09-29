@@ -1,7 +1,7 @@
 from smbus import *
 import time
-ARDUINO_ADDR = 0x42
-I2C_BUS_NO = 8
+# ARDUINO_ADDR = 0x42
+# I2C_BUS_NO = 8
 
 
 
@@ -16,7 +16,7 @@ class master:
     def __init__(self) -> None:
         self.ARDUINO_ADDR = 0x50
         self.I2C_BUS_NO = 1
-        self.i2c_bus = SMBus(I2C_BUS_NO)
+        self.i2c_bus = SMBus(self.I2C_BUS_NO)
     def send_test(self,mode,data=0):
 
         try:
