@@ -33,7 +33,7 @@ class master:
             if b[1]>128:
                 ext1=255-ext1
                 ext2=256-ext2
-                ouput=-((ext1**16^2)+ext2)
+                ouput=-((ext1*16**2)+ext2)
                 
             print(ouput)
         except OSError:
