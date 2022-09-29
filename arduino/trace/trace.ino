@@ -109,7 +109,7 @@ byte data[4];
 void requestEvent() {
   // Read from the register variable to know what to send back
   Serial.print("Event");
-  int val = -100;
+  int val = 10000;
   int low = 0x00ff & val;
   int high = (0xff00 & val) >> 8;
   data[1]=high;  
