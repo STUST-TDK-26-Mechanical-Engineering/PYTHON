@@ -27,10 +27,10 @@ class master:
             # print("1")
             # b = self.i2c_bus.read_byte_data(self.ARDUINO_ADDR,0x01,4)
             b=self.i2c_bus.read_i2c_block_data(self.ARDUINO_ADDR,0x01, 4)
-            ext1=b[2]
-            ext2=b[3]
+            ext1=b[1]
+            ext2=b[2]
             ouput=(ext1*16^2)+ext2
-            if b[2]<128:
+            if b[2]>128:
                 ext1=255-ext1
                 ext2=256-ext2
                 ouput=-((ext1*16^2)+ext2)
