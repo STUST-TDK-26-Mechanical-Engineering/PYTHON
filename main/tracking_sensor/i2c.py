@@ -30,7 +30,7 @@ class master:
             ext1=b[1]
             ext2=b[2]
             ouput=(ext1*16^2)+ext2
-            if b[2]>128:
+            if b[2]<128:
                 ext1=255-ext1
                 ext2=256-ext2
                 ouput=-((ext1*16^2)+ext2)
