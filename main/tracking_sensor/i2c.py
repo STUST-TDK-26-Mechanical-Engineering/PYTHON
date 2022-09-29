@@ -26,10 +26,10 @@ class master:
             self.i2c_bus.write_i2c_block_data(self.ARDUINO_ADDR,mode,[data])
             # print("1")
             # b = self.i2c_bus.read_byte_data(self.ARDUINO_ADDR,0x01,4)
-            b=self.i2c_bus.read_i2c_block_data(self.ARDUINO_ADDR, 0x01, 4)
+            b=self.i2c_bus.read_i2c_block_data(self.ARDUINO_ADDR,0x01, 4)
             print(b)
         except OSError:
             print("OSError")    
 
 a=master()
-a.send_test(0x23)
+a.send_test(0x01)
