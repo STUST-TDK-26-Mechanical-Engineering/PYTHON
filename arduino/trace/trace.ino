@@ -41,15 +41,15 @@ void setup() {
 } 
 int pid_val=0;
 void loop() {
-  int val = 500;
-  int low = 0x00ff & val;
-  int high = (0xff00 & val) >> 8;
+  // int val = 500;
+  // int low = 0x00ff & val;
+  // int high = (0xff00 & val) >> 8;
   // Serial.print(String(val, HEX));
   // Serial.print("\t");
   // Serial.print(String(low, HEX));
   // Serial.print("\t");
   // Serial.print(String(high, HEX));
-  // Serial.print("\t");
+  // Serial.println("\t");
   // String(-500, HEX);
   myPID.run(); //call every loop, updates automatically at certain time interval
   if (!digitalRead(DO2)){
@@ -63,23 +63,23 @@ void loop() {
   }if (!digitalRead(DO4)){
     input-=10;
   }
-  if(!digitalRead(DO2)&&!digitalRead(DO3)){
-    // myPID.reset();
+  if(!digitalRead(DO1)&&digitalRead(DO2)&&digitalRead(DO3)&&!digitalRead(DO4)){
+    myPID.reset();
     input=0;
     outputVal=0;
   }
-  // Serial.print(outputVal);
-  // Serial.print("\t");
-  // Serial.print(input);
-  // Serial.print("\t");
-  // Serial.print(digitalRead(DO1));
-  // Serial.print("\t");
-  // Serial.print(digitalRead(DO2));
-  // Serial.print("\t");
-  // Serial.print(digitalRead(DO3));
-  // Serial.print("\t");
-  // Serial.print(digitalRead(DO4));
-  // Serial.println("\t");
+  Serial.print(outputVal);
+  Serial.print("\t");
+  Serial.print(input);
+  Serial.print("\t");
+  Serial.print(digitalRead(DO1));
+  Serial.print("\t");
+  Serial.print(digitalRead(DO2));
+  Serial.print("\t");
+  Serial.print(digitalRead(DO3));
+  Serial.print("\t");
+  Serial.print(digitalRead(DO4));
+  Serial.println("\t");
   // Serial.print(digitalRead(RDO1));
   // Serial.print("\t");
   // Serial.print(digitalRead(RDO2));
@@ -87,7 +87,7 @@ void loop() {
   // Serial.print(digitalRead(RDO3));
   // Serial.print("\t");
   // Serial.print(digitalRead(RDO4));
-  // Serial.print("\n");
+  Serial.print("\n");
   // delay(500);
 }
 void receiveEvent(int bytes) {
@@ -109,7 +109,7 @@ byte data[4];
 void requestEvent() {
   // Read from the register variable to know what to send back
   Serial.print("Event");
-  int val = 6683;
+  int val =floor(outputVal);
   int low = 0x00ff & val;
   int high = (0xff00 & val) >> 8;
   data[1]=high;  

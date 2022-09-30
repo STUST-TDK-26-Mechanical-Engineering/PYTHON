@@ -38,6 +38,6 @@ class master:
             print(ouput)
         except OSError:
             print("OSError")    
-
-a=master()
-a.send_test(0x01)
+while 1:
+    a=master()
+    a.send_test(0x01)
