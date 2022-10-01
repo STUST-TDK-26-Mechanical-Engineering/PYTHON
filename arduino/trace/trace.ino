@@ -40,7 +40,7 @@ void setup() {
   setPoint=0;  
 } 
 int pid_val=0;
-void loop() {
+void loop() {                                                                                                                                                       
   // int val = 500;
   // int low = 0x00ff & val;
   // int high = (0xff00 & val) >> 8;
