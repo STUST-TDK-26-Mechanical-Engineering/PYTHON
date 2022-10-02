@@ -17,6 +17,11 @@ class master:
         self.ARDUINO_ADDR = 0x50
         self.I2C_BUS_NO = 1
         self.i2c_bus = SMBus(self.I2C_BUS_NO)
+    def res(self):
+        try:
+            self.i2c_bus.write_i2c_block_data(self.ARDUINO_ADDR,0x31)    
+        except:
+            print("i2c錯誤")    
     def send_test(self,mode=0xff,data=0):
 
         try:

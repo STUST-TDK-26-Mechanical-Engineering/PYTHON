@@ -33,7 +33,7 @@ void setup() {
   Serial.begin(9600);                       
   init_i();
   // myPID.setBangBang(4);
-  myPID.setTimeStep(400);
+  myPID.setTimeStep(10);
   Wire.begin(I2C_ADDRESS);
   Wire.onRequest(requestEvent);
   Wire.onReceive(receiveEvent);
@@ -56,12 +56,12 @@ void loop() {
     input+=1;
   }
   if (!digitalRead(DO1)){
-    input+=10;
+    input+=2;
   }
   if (!digitalRead(DO3)){
     input-=1;
   }if (!digitalRead(DO4)){
-    input-=10;
+    input-=2;
   }
   if(!digitalRead(DO1)&&digitalRead(DO2)&&digitalRead(DO3)&&!digitalRead(DO4)){
     myPID.reset();
@@ -96,6 +96,11 @@ void receiveEvent(int bytes) {
   // Serial.println(opcode);
   // 如果超過 1 個字節，則主機正在寫入從機
   if (bytes > 1) {
+    if (opcode==0x31){
+      myPID.reset();
+      input=0;
+      outputVal=0;
+    }
     // if (opcode == REGISTER_SPEED) {
     //   speed = Wire.read();
     //   Serial.println(speed);
