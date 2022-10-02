@@ -68,10 +68,10 @@ void loop() {
     input=0;
     outputVal=0;
   }
-  Serial.print(outputVal);
-  Serial.print("\t");
-  Serial.print(input);
-  Serial.print("\t");
+  // Serial.print(outputVal);
+  // Serial.print("\t");
+  // Serial.print(input);
+  // Serial.print("\t");
   // Serial.print(digitalRead(DO1));
   // Serial.print("\t");
   // Serial.print(digitalRead(DO2));
@@ -87,7 +87,7 @@ void loop() {
   // Serial.print(digitalRead(RDO3));
   // Serial.print("\t");
   // Serial.print(digitalRead(RDO4));
-  Serial.print("\n");
+  // Serial.print("\n");
   // delay(500);
 }
 void receiveEvent(int bytes) {
@@ -111,7 +111,8 @@ void receiveEvent(int bytes) {
 byte data[4];
 void requestEvent() {
   // Read from the register variable to know what to send back
-  Serial.println("Event");
+  // Serial.println("Event");
+  Serial.println(opcode);
   int val =floor(outputVal);
   int low = 0x00ff & val;
   int high = (0xff00 & val) >> 8;
@@ -119,9 +120,10 @@ void requestEvent() {
   data[2]=low;
   // Serial.print(sizeof(speed));
   if (opcode == 0x05) {
+    
     for (int i = 0; i < 4; i++) {
       Wire.write((uint8_t *)&data[i],sizeof(data[i]));
-      Serial.println(data[i]);
+      // Serial.println(data[i]);
     }
     // Wire.write((uint8_t *)&speed, sizeof(speed));
   } else if (opcode==0xA4){

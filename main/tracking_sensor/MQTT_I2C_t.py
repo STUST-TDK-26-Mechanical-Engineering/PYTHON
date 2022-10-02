@@ -50,7 +50,7 @@ def subscribe(client: mqtt_client):#訂閱
 def run():
     client = connect_mqtt()
     subscribe(client)
-    text(client)
+    # text(client)
     
     client.loop_forever()
 if __name__ == '__main__':
