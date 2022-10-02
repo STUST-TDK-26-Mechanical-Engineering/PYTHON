@@ -1,5 +1,5 @@
 from paho.mqtt import client as mqtt_client
-from i2c import master
+from main.tracking_sensor.i2c_01 import master
 import random
 import time
 import threading
