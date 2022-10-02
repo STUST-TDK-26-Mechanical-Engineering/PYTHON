@@ -23,7 +23,7 @@ def connect_mqtt():#連接伺服器
 def text(client: mqtt_client):
     while 1:
 
-        data=master.send_test(0x01)
+        data=i2c.send_test(0x01)
         client.publish(topic="/bot/chassis", payload=json.dumps({"msg": "log.play","X": 0,"Y": data,"Z": 0,"S": 1}), qos=0)
 def subscribe(client: mqtt_client):#訂閱
     def on_message(client, userdata, msg):
