@@ -17,7 +17,7 @@
 #define KD 0
 uint8_t opcode; // register
 uint8_t speed;  // fan speed: 0=off, 150=low, 200=medium, 250=high
-double input, setPoint, outputVal;
+volatile double input, setPoint, outputVal;
 AutoPID myPID(&input, &setPoint, &outputVal, OUTPUT_MIN, OUTPUT_MAX, KP, KI, KD);
 void init_i(){
   pinMode(DO1,INPUT);
@@ -68,10 +68,10 @@ void loop() {
     input=0;
     outputVal=0;
   }
-  // Serial.print(outputVal);
-  // Serial.print("\t");
-  // Serial.print(input);
-  // Serial.print("\t");
+  Serial.print(outputVal);
+  Serial.print("\t");
+  Serial.print(input);
+  Serial.print("\t");
   // Serial.print(digitalRead(DO1));
   // Serial.print("\t");
   // Serial.print(digitalRead(DO2));
@@ -87,8 +87,8 @@ void loop() {
   // Serial.print(digitalRead(RDO3));
   // Serial.print("\t");
   // Serial.print(digitalRead(RDO4));
-  // Serial.print("\n");
-  delay(500);
+  Serial.print("\n");
+  delay(1);
 }
 void receiveEvent(int bytes) {
   //讀取第一個字節以確定涉及哪個寄存器
@@ -98,13 +98,14 @@ void receiveEvent(int bytes) {
   
   if (bytes > 1) {
    
-    if (opcode==0x08){
+    if (opcode == 0x08){
+      speed = Wire.read();  
       myPID.reset();
       input=0;
       outputVal=0;
       Serial.println("res");
       // Wire.write(4);
-      delay(500);
+      // delay(500);
     }
     // if (opcode == REGISTER_SPEED) {
     //   speed = Wire.read();
@@ -119,7 +120,7 @@ byte data[4];
 void requestEvent() {
   // Read from the register variable to know what to send back
   // Serial.println("Event");
-  Serial.println(opcode);
+  // Serial.println(opcode);
   int val =floor(outputVal);
   int low = 0x00ff & val;
   int high = (0xff00 & val) >> 8;
@@ -127,14 +128,12 @@ void requestEvent() {
   data[2]=low;
   // Serial.print(sizeof(speed));
   if (opcode == 0x05) {
-    
     for (int i = 0; i < 4; i++) {
       Wire.write((uint8_t *)&data[i],sizeof(data[i]));
       // Serial.println(data[i]);
     }
     // Wire.write((uint8_t *)&speed, sizeof(speed));
-  }
-    else {
+  }else {
     delay(5000);
     Wire.write(3);
   }
