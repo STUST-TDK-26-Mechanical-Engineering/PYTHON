@@ -17,11 +17,12 @@ class master:
         self.ARDUINO_ADDR = 0x50
         self.I2C_BUS_NO = 1
         self.i2c_bus = SMBus(self.I2C_BUS_NO)
-    def ress(self):
+    def ress(self,mode=0x21,data=0):
        
-        self.i2c_bus.write_byte(self.ARDUINO_ADDR,0x21)
-        # print("1")
-        s = self.i2c_bus.read_byte_data(self.ARDUINO_ADDR,0x01)
+        self.i2c_bus.write_i2c_block_data(self.ARDUINO_ADDR,mode,[data])
+            # print("1")
+        b = self.i2c_bus.read_byte_data(self.ARDUINO_ADDR,0x01)
+        print(b)
         print("res")
                 
          

@@ -69,12 +69,12 @@ void loop() {
     input=0;
     outputVal=0;
   }
-  Serial.print(outputVal);
-  Serial.print("\t");
-  Serial.print(input);
-  Serial.print("\t");
-  Serial.print(stale);
-  Serial.print("\t");  
+  // Serial.print(outputVal);
+  // Serial.print("\t");
+  // Serial.print(input);
+  // Serial.print("\t");
+  // Serial.print(stale);
+  // Serial.print("\t");  
   // Serial.print(digitalRead(DO1));
   // Serial.print("\t");
   // Serial.print(digitalRead(DO2));
@@ -90,13 +90,13 @@ void loop() {
   // Serial.print(digitalRead(RDO3));
   // Serial.print("\t");
   // Serial.print(digitalRead(RDO4));
-  Serial.print("\n");
+  // Serial.print("\n");
   delay(1);
 }
 void receiveEvent(int bytes) {
   //讀取第一個字節以確定涉及哪個寄存器
   opcode = Wire.read();
-  // Serial.println(opcode);
+  Serial.println(String(opcode,HEX));
   // 如果超過 1 個字節，則主機正在寫入從機
   
   if (bytes > 1) {
