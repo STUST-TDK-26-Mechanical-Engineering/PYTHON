@@ -17,7 +17,7 @@ class master:
         self.ARDUINO_ADDR = 0x50
         self.I2C_BUS_NO = 1
         self.i2c_bus = SMBus(self.I2C_BUS_NO)
-    def send_test(self,mode,data=0):
+    def send_test(self,mode=0xff,data=0):
 
         try:
             #bus.pec = 1  # Enable PEC
