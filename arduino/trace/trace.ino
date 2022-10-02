@@ -88,7 +88,7 @@ void loop() {
   // Serial.print("\t");
   // Serial.print(digitalRead(RDO4));
   // Serial.print("\n");
-  // delay(500);
+  delay(500);
 }
 void receiveEvent(int bytes) {
   //讀取第一個字節以確定涉及哪個寄存器
@@ -98,7 +98,14 @@ void receiveEvent(int bytes) {
   
   if (bytes > 1) {
    
-    
+    if (opcode==0x08){
+      myPID.reset();
+      input=0;
+      outputVal=0;
+      Serial.println("res");
+      // Wire.write(4);
+      delay(500);
+    }
     // if (opcode == REGISTER_SPEED) {
     //   speed = Wire.read();
     //   Serial.println(speed);
@@ -126,13 +133,7 @@ void requestEvent() {
       // Serial.println(data[i]);
     }
     // Wire.write((uint8_t *)&speed, sizeof(speed));
-  } else if (opcode==0xA4){
-      myPID.reset();
-      input=0;
-      outputVal=0;
-      Serial.println("res");
-      delay(500);
-    }
+  }
     else {
     delay(5000);
     Wire.write(3);
