@@ -22,7 +22,7 @@ class master:
             self.i2c_bus.write_i2c_block_data(self.ARDUINO_ADDR,0xA4,[0x01])
             self.i2c_bus.read_i2c_block_data(self.ARDUINO_ADDR,0x01, 4)
             print("res")
-            # time.sleep(1)    
+            time.sleep(1)    
         except:
             print("i2c錯誤")    
     def send_test(self,mode=0xff,data=0):
