@@ -96,10 +96,12 @@ void receiveEvent(int bytes) {
   // Serial.println(opcode);
   // 如果超過 1 個字節，則主機正在寫入從機
   if (bytes > 1) {
-    if (opcode==0x31){
+    if (opcode==0xA4){
       myPID.reset();
       input=0;
       outputVal=0;
+      Serial.println("res");
+      delay(500);
     }
     // if (opcode == REGISTER_SPEED) {
     //   speed = Wire.read();
