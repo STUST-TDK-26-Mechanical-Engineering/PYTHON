@@ -15,6 +15,7 @@
 #define KP 1
 #define KI 0.003
 #define KD 0
+volatile bool stale=false;
 uint8_t opcode; // register
 uint8_t speed;  // fan speed: 0=off, 150=low, 200=medium, 250=high
 volatile double input, setPoint, outputVal;
@@ -72,6 +73,8 @@ void loop() {
   Serial.print("\t");
   Serial.print(input);
   Serial.print("\t");
+  Serial.print(stale);
+  Serial.print("\t");  
   // Serial.print(digitalRead(DO1));
   // Serial.print("\t");
   // Serial.print(digitalRead(DO2));
@@ -103,6 +106,7 @@ void receiveEvent(int bytes) {
       myPID.reset();
       input=0;
       outputVal=0;
+      stale=true;
       Serial.println("res");
       // Wire.write(4);
       // delay(500);

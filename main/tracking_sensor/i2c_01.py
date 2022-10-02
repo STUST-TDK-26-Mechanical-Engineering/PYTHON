@@ -19,7 +19,7 @@ class master:
         self.i2c_bus = SMBus(self.I2C_BUS_NO)
     def ress(self):
        
-        self.i2c_bus.write_byte(self.ARDUINO_ADDR,2)
+        self.i2c_bus.write_byte(self.ARDUINO_ADDR,0x21)
         # print("1")
         s = self.i2c_bus.read_byte_data(self.ARDUINO_ADDR,0x01)
         print("res")
