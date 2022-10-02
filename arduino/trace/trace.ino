@@ -98,7 +98,7 @@ void receiveEvent(int bytes) {
   
   if (bytes > 1) {
    
-    if (opcode == 0x08){
+    if (opcode == 0x21){
       speed = Wire.read();  
       myPID.reset();
       input=0;
