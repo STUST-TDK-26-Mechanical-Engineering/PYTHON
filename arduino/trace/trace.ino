@@ -72,14 +72,14 @@ void loop() {
   Serial.print("\t");
   Serial.print(input);
   Serial.print("\t");
-  Serial.print(digitalRead(DO1));
-  Serial.print("\t");
-  Serial.print(digitalRead(DO2));
-  Serial.print("\t");
-  Serial.print(digitalRead(DO3));
-  Serial.print("\t");
-  Serial.print(digitalRead(DO4));
-  Serial.println("\t");
+  // Serial.print(digitalRead(DO1));
+  // Serial.print("\t");
+  // Serial.print(digitalRead(DO2));
+  // Serial.print("\t");
+  // Serial.print(digitalRead(DO3));
+  // Serial.print("\t");
+  // Serial.print(digitalRead(DO4));
+  // Serial.println("\t");
   // Serial.print(digitalRead(RDO1));
   // Serial.print("\t");
   // Serial.print(digitalRead(RDO2));
@@ -95,14 +95,10 @@ void receiveEvent(int bytes) {
   opcode = Wire.read();
   // Serial.println(opcode);
   // 如果超過 1 個字節，則主機正在寫入從機
+  
   if (bytes > 1) {
-    if (opcode==0xA4){
-      myPID.reset();
-      input=0;
-      outputVal=0;
-      Serial.println("res");
-      delay(500);
-    }
+   
+    
     // if (opcode == REGISTER_SPEED) {
     //   speed = Wire.read();
     //   Serial.println(speed);
@@ -115,20 +111,27 @@ void receiveEvent(int bytes) {
 byte data[4];
 void requestEvent() {
   // Read from the register variable to know what to send back
-  Serial.print("Event");
+  Serial.println("Event");
   int val =floor(outputVal);
   int low = 0x00ff & val;
   int high = (0xff00 & val) >> 8;
   data[1]=high;  
   data[2]=low;
   // Serial.print(sizeof(speed));
-  if (opcode == 0x01) {
+  if (opcode == 0x05) {
     for (int i = 0; i < 4; i++) {
       Wire.write((uint8_t *)&data[i],sizeof(data[i]));
       Serial.println(data[i]);
     }
     // Wire.write((uint8_t *)&speed, sizeof(speed));
-  } else {
+  } else if (opcode==0xA4){
+      myPID.reset();
+      input=0;
+      outputVal=0;
+      Serial.println("res");
+      delay(500);
+    }
+    else {
     delay(5000);
     Wire.write(3);
   }
