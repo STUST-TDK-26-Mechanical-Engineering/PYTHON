@@ -38,7 +38,7 @@ void setup() {
   Wire.begin(I2C_ADDRESS);
   Wire.onRequest(requestEvent);
   Wire.onReceive(receiveEvent);
-  Wire.setWireTimeout(3000 /* us */, true /* reset_on_timeout */);
+  Wire.setWireTimeout(13000 /* us */, true /* reset_on_timeout */);
   setPoint=0;  
 } 
 int pid_val=0;
@@ -104,11 +104,11 @@ void receiveEvent(int bytes) {
    
     if (opcode == 0x21){
       speed = Wire.read();  
-      myPID.reset();
-      input=0;
-      outputVal=0;
-      stale=true;
-      Serial.println("res");
+      // myPID.reset();
+      // input=0;
+      // outputVal=0;
+      // stale=true;
+      Serial.println("speed");
       // Wire.write(4);
       // delay(500);
     }
