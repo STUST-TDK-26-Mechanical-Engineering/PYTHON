@@ -104,11 +104,11 @@ void receiveEvent(int bytes) {
    
     if (opcode == 0x03){
       speed = Wire.read(); 
-      speed = Wire.read(); 
-      // myPID.reset();
-      // input=0;
-      // outputVal=0;
-      // stale=true;
+      // speed = Wire.read(); 
+      myPID.reset();
+      input=0;
+      outputVal=0;
+      stale=true;
       Serial.println(speed);
       // Wire.write(4);
       // delay(500);
@@ -133,7 +133,7 @@ void requestEvent() {
   data[1]=high;  
   data[2]=low;
   // Serial.print(sizeof(speed));
-  if (opcode == 0x05) {
+  if (opcode == 0x01) {
     for (int i = 0; i < 4; i++) {
       Wire.write((uint8_t *)&data[i],sizeof(data[i]));
       // Serial.println(data[i]);
