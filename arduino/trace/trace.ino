@@ -102,13 +102,14 @@ void receiveEvent(int bytes) {
   
   if (bytes > 1) {
    
-    if (opcode == 0x21){
-      speed = Wire.read();  
+    if (opcode == 0x03){
+      speed = Wire.read(); 
+      speed = Wire.read(); 
       // myPID.reset();
       // input=0;
       // outputVal=0;
       // stale=true;
-      Serial.println("speed");
+      Serial.println(speed);
       // Wire.write(4);
       // delay(500);
     }
