@@ -36,8 +36,9 @@ class master:
                 ouput=-((ext1*16**2)+ext2)
                 
             print(ouput)
+            return ouput
         except OSError:
             print("OSError")    
-while 1:
-    a=master()
-    a.send_test(0x01)
+# while 1:
+#     a=master()
+#     a.send_test(0x01)
