@@ -38,6 +38,7 @@ void setup() {
   Wire.begin(I2C_ADDRESS);
   Wire.onRequest(requestEvent);
   Wire.onReceive(receiveEvent);
+  Wire.setWireTimeout(3000 /* us */, true /* reset_on_timeout */);
   setPoint=0;  
 } 
 int pid_val=0;

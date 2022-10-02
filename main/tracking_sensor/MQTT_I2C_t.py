@@ -21,7 +21,7 @@ def connect_mqtt():#連接伺服器
     client.connect(broker, port)
     return client
 def text(client: mqtt_client):
-    while 1:
+    for s in range(10):
 
         data=i2c.send_test(mode=0x05)
         client.publish(topic="/bot/chassis", payload=json.dumps({"msg": "log.play","X": 0,"Y": data,"Z": 0,"S": 0.08}), qos=0)
