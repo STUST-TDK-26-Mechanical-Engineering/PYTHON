@@ -1,3 +1,4 @@
-import datetime
+import datetime,time
 theTime = datetime.datetime.now()
-print(theTime)
+a=time.time()
+print(time.time()-a)

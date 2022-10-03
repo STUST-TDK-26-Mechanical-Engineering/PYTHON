@@ -23,7 +23,7 @@ def connect_mqtt():#連接伺服器
 def text(client: mqtt_client,times):
     while 1:
         if time.time()-times>3000:
-            break
+            print("break")
         y_data,z_data=i2c.send_test(mode=0x05)
         if y_data==0:
             y_data=round(z_data/2.5)
