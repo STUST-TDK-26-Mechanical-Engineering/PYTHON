@@ -110,6 +110,11 @@ void loop() {
   // Serial.print("\t");
   // Serial.print(stale);
   // Serial.print("\t");
+  Serial.print(Z_outputVal);
+  Serial.print("\t");
+  Serial.print(Z_input);
+  Serial.print("\t");
+ 
   // Serial.print(digitalRead(DO1));
   // Serial.print("\t");
   // Serial.print(digitalRead(DO2));
@@ -125,7 +130,7 @@ void loop() {
   // Serial.print(digitalRead(RDO3));
   // Serial.print("\t");
   // Serial.print(digitalRead(RDO4));
-  // Serial.print("\n");
+  Serial.print("\n");
   delay(30);
 }
 void receiveEvent(int bytes) {
@@ -167,6 +172,7 @@ void requestEvent() {
   int val = floor(outputVal);
   int low = 0x00ff & val;
   int high = (0xff00 & val) >> 8;
+  
   int Z_val = floor(Z_outputVal);
   int Z_low = 0x00ff & Z_val;
   int Z_high = (0xff00 & Z_val) >> 8;
