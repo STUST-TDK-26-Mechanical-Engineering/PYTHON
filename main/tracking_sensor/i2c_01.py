@@ -42,13 +42,13 @@ class master:
             z2=data1[3]
             print(y1,y2,z1,z2)
             y_ouput=(y1*16**2)+y2#y校正參數
-            if data1[1]>128:
+            if y1>128:
                 y1=255-y1
                 y2=256-y2
                 y_ouput=-((y1*16**2)+y2)
             ## 16進位轉10進位    
             z_ouput=(z1*16**2)+z2#z旋轉校正參數
-            if data1[1]>128:
+            if z1>128:
                 z1=255-z1
                 z2=256-z2
                 z_ouput=-((z1*16**2)+z2)   
