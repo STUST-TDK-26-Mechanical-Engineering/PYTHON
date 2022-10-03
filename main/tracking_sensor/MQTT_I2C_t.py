@@ -20,10 +20,10 @@ def connect_mqtt():#連接伺服器
     client.on_connect = on_connect
     client.connect(broker, port)
     return client
-def text(client: mqtt_client,times):
+def text(client: mqtt_client,times,s):
     while 1:
         print(time.time(),times,time.time()-times)
-        if time.time()-times>10:
+        if time.time()-times>s:
             print("break")
             break
         y_data,z_data=i2c.send_test(mode=0x05)
@@ -41,7 +41,7 @@ def subscribe(client: mqtt_client):#訂閱
         if m_in["msg"]=="i2c.teack":
             s=m_in["s"]
             start = time.time()
-            text(client,start)
+            text(client,start,s)
         #     mode=m_in["mode"] 
         #     if mode == "0x01":
         #         i2c.send_test(0x01)
