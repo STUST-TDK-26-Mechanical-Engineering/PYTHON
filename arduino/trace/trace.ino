@@ -53,10 +53,10 @@ void setup() {
 int pid_val = 0;
 void yData(){
   if (!digitalRead(DO1)) {
-    input += 1;
+    input += 2;
   }
   if (!digitalRead(DO2)) {
-    input += 2;
+    input += 1;
   }
   if (!digitalRead(DO3)) {
     input -= 1;
@@ -107,32 +107,32 @@ void loop() {
   Z_myPID.run();
   yData();
   zData();
-  // Serial.print(outputVal);
-  // Serial.print("\t");
-  // Serial.print(input);
-  // Serial.print("\t");
+  Serial.print(outputVal);
+  Serial.print("\t");
+  Serial.print(input);
+  Serial.print("\t");
   // Serial.print(stale);
   // Serial.print("\t");
-  Serial.print(Z_outputVal);
-  Serial.print("\t");
-  Serial.print(Z_input);
-  Serial.print("\t");
+  // Serial.print(Z_outputVal);
+  // Serial.print("\t");
+  // Serial.print(Z_input);
+  // Serial.print("\t");
  
-  // Serial.print(digitalRead(DO1));
-  // Serial.print("\t");
-  // Serial.print(digitalRead(DO2));
-  // Serial.print("\t");
-  // Serial.print(digitalRead(DO3));
-  // Serial.print("\t");
-  // Serial.print(digitalRead(DO4));
-  // Serial.println("\t");
-  Serial.print(digitalRead(RDO1));
+  Serial.print(digitalRead(DO1));
   Serial.print("\t");
-  Serial.print(digitalRead(RDO2));
+  Serial.print(digitalRead(DO2));
   Serial.print("\t");
-  Serial.print(digitalRead(RDO3));
+  Serial.print(digitalRead(DO3));
   Serial.print("\t");
-  Serial.print(digitalRead(RDO4));
+  Serial.print(digitalRead(DO4));
+  Serial.println("\t");
+  // Serial.print(digitalRead(RDO1));
+  // Serial.print("\t");
+  // Serial.print(digitalRead(RDO2));
+  // Serial.print("\t");
+  // Serial.print(digitalRead(RDO3));
+  // Serial.print("\t");
+  // Serial.print(digitalRead(RDO4));
   Serial.print("\n");
   delay(30);
 }

@@ -20,9 +20,10 @@ def connect_mqtt():#連接伺服器
     client.on_connect = on_connect
     client.connect(broker, port)
     return client
-def text(client: mqtt_client):
+def text(client: mqtt_client,times):
     while 1:
-
+        if time.time()-times>3000:
+            break
         y_data,z_data=i2c.send_test(mode=0x05)
         if y_data==0:
             y_data=round(z_data/2.5)
@@ -53,7 +54,8 @@ def subscribe(client: mqtt_client):#訂閱
 
 def run():
     client = connect_mqtt()
-    subscribe(client)
+    start = time.time()
+    subscribe(client,start)
     text(client)
     
     client.loop_forever()
