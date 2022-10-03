@@ -40,7 +40,7 @@ class master:
             y2=data1[1]
             z1=data1[2]
             z2=data1[3]
-            print(y1,y2,z1,z2)
+            # print(y1,y2,z1,z2)
             y_ouput=(y1*16**2)+y2#y校正參數
             if y1>128:
                 y1=255-y1
@@ -52,7 +52,7 @@ class master:
                 z1=255-z1
                 z2=256-z2
                 z_ouput=-((z1*16**2)+z2)   
-            # print("y:",y_ouput,"\tz:",z_ouput)
+            print("y:",y_ouput,"\tz:",z_ouput)
             return y_ouput,z_ouput
         except OSError:
             print("OSError")    
