@@ -35,17 +35,24 @@ class master:
             # self.i2c_bus.write_i2c_block_data(self.ARDUINO_ADDR,mode,[data])
             # print("1")
             # b = self.i2c_bus.read_byte_data(self.ARDUINO_ADDR,0x01,4)
-            b=self.i2c_bus.read_i2c_block_data(self.ARDUINO_ADDR,0x01, 4)
-            ext1=b[1]
-            ext2=b[2]
-            ouput=(ext1*16**2)+ext2
-            if b[1]>128:
-                ext1=255-ext1
-                ext2=256-ext2
-                ouput=-((ext1*16**2)+ext2)
-                
-            print(ouput)
-            return ouput
+            data1=self.i2c_bus.read_i2c_block_data(self.ARDUINO_ADDR,0x01, 4)
+            y1=data1[1]
+            y2=data1[2]
+            z2=data1[3]
+            z2=data1[4]
+            y_ouput=(y1*16**2)+y2#y校正參數
+            if data1[1]>128:
+                y1=255-y1
+                y2=256-y2
+                y_ouput=-((y1*16**2)+y2)
+            ## 16進位轉10進位    
+            z_ouput=(z1*16**2)+z2#z旋轉校正參數
+            if data1[1]>128:
+                z1=255-z1
+                z2=256-z2
+                z_ouput=-((z1*16**2)+z2)   
+            print("y:",y_ouput,"\tz:",z_ouput)
+            return y_ouput,z_ouput
         except OSError:
             print("OSError")    
 # while 1:
