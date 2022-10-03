@@ -107,10 +107,10 @@ void loop() {
   Z_myPID.run();
   yData();
   zData();
-  Serial.print(outputVal);
-  Serial.print("\t");
-  Serial.print(input);
-  Serial.print("\t");
+  // Serial.print(outputVal);
+  // Serial.print("\t");
+  // Serial.print(input);
+  // Serial.print("\t");
   // Serial.print(stale);
   // Serial.print("\t");
   // Serial.print(Z_outputVal);
@@ -118,14 +118,14 @@ void loop() {
   // Serial.print(Z_input);
   // Serial.print("\t");
  
-  Serial.print(digitalRead(DO1));
-  Serial.print("\t");
-  Serial.print(digitalRead(DO2));
-  Serial.print("\t");
-  Serial.print(digitalRead(DO3));
-  Serial.print("\t");
-  Serial.print(digitalRead(DO4));
-  Serial.println("\t");
+  // Serial.print(digitalRead(DO1));
+  // Serial.print("\t");
+  // Serial.print(digitalRead(DO2));
+  // Serial.print("\t");
+  // Serial.print(digitalRead(DO3));
+  // Serial.print("\t");
+  // Serial.print(digitalRead(DO4));
+  // Serial.println("\t");
   // Serial.print(digitalRead(RDO1));
   // Serial.print("\t");
   // Serial.print(digitalRead(RDO2));
@@ -157,6 +157,12 @@ void receiveEvent(int bytes) {
       Serial.println(speed);
       // Wire.write(4);
       // delay(500);
+    }else if(opcode == 0x08){
+      int y1 = Wire.read();
+      int y2=Wire.read();
+      Serial.print(y1);
+      Serial.print("\t");
+      Serial.println(y2);
     }
     // if (opcode == REGISTER_SPEED) {
     //   speed = Wire.read();
