@@ -36,10 +36,10 @@ class master:
             # print("1")
             # b = self.i2c_bus.read_byte_data(self.ARDUINO_ADDR,0x01,4)
             data1=self.i2c_bus.read_i2c_block_data(self.ARDUINO_ADDR,0x01, 4)
-            y1=data1[1]
-            y2=data1[2]
+            y1=data1[0]
+            y2=data1[1]
+            z2=data1[2]
             z2=data1[3]
-            z2=data1[4]
             y_ouput=(y1*16**2)+y2#y校正參數
             if data1[1]>128:
                 y1=255-y1

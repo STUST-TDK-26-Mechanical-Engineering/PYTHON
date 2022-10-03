@@ -170,10 +170,10 @@ void requestEvent() {
   int Z_val = floor(Z_outputVal);
   int Z_low = 0x00ff & Z_val;
   int Z_high = (0xff00 & Z_val) >> 8;
-  data[1] = high;
-  data[2] = low;
-  data[3] = Z_high;
-  data[4] = Z_low;
+  data[0] = high;
+  data[1] = low;
+  data[2] = Z_high;
+  data[3] = Z_low;
   // Serial.print(sizeof(speed));
   if (opcode == 0x01) {
     for (int i = 0; i < 4; i++) {
