@@ -38,7 +38,10 @@ def subscribe(client: mqtt_client):#訂閱
         m_in=json.loads(msg.payload.decode()) #decode json data
         print(m_in["msg"])
         
-        # if m_in["msg"]=="i2c.test":
+        if m_in["msg"]=="i2c.teack":
+            s=m_in["s"]
+            start = time.time()
+            text(client,start)
         #     mode=m_in["mode"] 
         #     if mode == "0x01":
         #         i2c.send_test(0x01)
@@ -58,7 +61,7 @@ def run():
     client = connect_mqtt()
     start = time.time()
     subscribe(client)
-    text(client,start)
+    # text(client,start)
     
     client.loop_forever()
 if __name__ == '__main__':
