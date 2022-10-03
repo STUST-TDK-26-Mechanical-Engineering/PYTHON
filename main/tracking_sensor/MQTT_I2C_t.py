@@ -25,6 +25,7 @@ def text(client: mqtt_client,times):
         print(time.time(),times,time.time()-times)
         if time.time()-times>10:
             print("break")
+            break
         y_data,z_data=i2c.send_test(mode=0x05)
         if y_data==0:
             y_data=round(z_data/2.5)
