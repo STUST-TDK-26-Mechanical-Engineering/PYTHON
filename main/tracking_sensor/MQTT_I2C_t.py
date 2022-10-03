@@ -20,7 +20,9 @@ def connect_mqtt():#連接伺服器
     client.on_connect = on_connect
     client.connect(broker, port)
     return client
-def text(client: mqtt_client,times,s):
+def text(client: mqtt_client,times,s,y_init):
+    i2c.ress()
+    i2c.init(0x08,30)
     while 1:
         print(time.time(),times,time.time()-times)
         if time.time()-times>s:

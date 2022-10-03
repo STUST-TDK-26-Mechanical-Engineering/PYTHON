@@ -25,7 +25,12 @@ class master:
             # print(b)
         print("res")
                 
-         
+    def init(self,mode=0xff,data=0):
+        X2=data//256
+        X1=data%256
+        if(X2<0):
+            X2=X2+256
+        self.i2c_bus.write_i2c_block_data(self.ARDUINO_ADDR,mode,[X2,X1]) 
     def send_test(self,mode=0xff,data=0):
 
         try:
