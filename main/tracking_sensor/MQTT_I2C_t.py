@@ -55,8 +55,8 @@ def subscribe(client: mqtt_client):#訂閱
 def run():
     client = connect_mqtt()
     start = time.time()
-    subscribe(client,start)
-    text(client)
+    subscribe(client)
+    text(client,start)
     
     client.loop_forever()
 if __name__ == '__main__':
