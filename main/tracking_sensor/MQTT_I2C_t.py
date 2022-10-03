@@ -26,6 +26,8 @@ def text(client: mqtt_client):
         y_data,z_data=i2c.send_test(mode=0x05)
         if y_data==0:
             y_data=round(z_data/2.5)
+        else:
+           z_data=0     
         client.publish(topic="/bot/chassis", payload=json.dumps({"msg": "log.play","X": 0,"Y": y_data,"Z": z_data,"S": 0.08}), qos=0)
 def subscribe(client: mqtt_client):#訂閱
     def on_message(client, userdata, msg):
