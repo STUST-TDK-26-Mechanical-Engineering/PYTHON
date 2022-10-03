@@ -72,16 +72,16 @@ void yData(){
 }
 void zData(){
   if (!digitalRead(RDO2)) {
-    Z_input += 1;
-  }
-  if (!digitalRead(RDO1)) {
-    Z_input += 2;
-  }
-  if (!digitalRead(RDO3)) {
     Z_input -= 1;
   }
-  if (!digitalRead(RDO4)) {
+  if (!digitalRead(RDO1)) {
     Z_input -= 2;
+  }
+  if (!digitalRead(RDO3)) {
+    Z_input += 1;
+  }
+  if (!digitalRead(RDO4)) {
+    Z_input += 2;
   }
   if (!digitalRead(RDO1) && digitalRead(RDO2) && digitalRead(RDO3) && !digitalRead(RDO4)) {
     Z_myPID.reset();
@@ -172,7 +172,7 @@ void requestEvent() {
   int val = floor(outputVal);
   int low = 0x00ff & val;
   int high = (0xff00 & val) >> 8;
-  
+
   int Z_val = floor(Z_outputVal);
   int Z_low = 0x00ff & Z_val;
   int Z_high = (0xff00 & Z_val) >> 8;

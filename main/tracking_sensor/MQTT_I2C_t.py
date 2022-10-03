@@ -24,7 +24,7 @@ def text(client: mqtt_client):
     while 1:
 
         y_data,z_data=i2c.send_test(mode=0x05)
-        client.publish(topic="/bot/chassis", payload=json.dumps({"msg": "log.play","X": 0,"Y": y_data,"Z": z_data,"S": 0.08}), qos=0)
+        client.publish(topic="/bot/chassis", payload=json.dumps({"msg": "log.play","X": 0,"Y": y_data,"Z": 0,"S": 0.08}), qos=0)
 def subscribe(client: mqtt_client):#訂閱
     def on_message(client, userdata, msg):
         print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
