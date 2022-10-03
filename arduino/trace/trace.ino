@@ -1,5 +1,6 @@
 #include <AutoPID.h>
 #include <Wire.h>
+#include <math.h>
 #define I2C_ADDRESS 0x50  //主機位置
 #define DO1 5
 #define DO2 4
@@ -133,7 +134,7 @@ void loop() {
   // Serial.print(digitalRead(RDO3));
   // Serial.print("\t");
   // Serial.print(digitalRead(RDO4));
-  Serial.print("\n");
+  // Serial.print("\n");
   delay(30);
 }
 void receiveEvent(int bytes) {
@@ -163,6 +164,14 @@ void receiveEvent(int bytes) {
       Serial.print(y1);
       Serial.print("\t");
       Serial.println(y2);
+      int y_ouput=y1*pow(16,2)+y2;
+      if (y1>128){
+        y1=255-y1;
+        y2=256-y2;
+        y_ouput=-(y1*pow(16,2)+y2);
+      }
+      input= y_ouput;        
+      Serial.println(y_ouput);      
     }
     // if (opcode == REGISTER_SPEED) {
     //   speed = Wire.read();
