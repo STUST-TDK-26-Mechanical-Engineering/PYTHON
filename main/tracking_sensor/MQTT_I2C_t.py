@@ -22,7 +22,7 @@ def connect_mqtt():#連接伺服器
     return client
 def text(client: mqtt_client,times,s,y_init):
     i2c.ress()
-    i2c.init(0x08,30)
+    i2c.init(0x08,y_init)
     while 1:
         print(time.time(),times,time.time()-times)
         if time.time()-times>s:
@@ -42,8 +42,9 @@ def subscribe(client: mqtt_client):#訂閱
         
         if m_in["msg"]=="i2c.teack":
             s=m_in["s"]
+            y_init=m_in["y_init"]
             start = time.time()
-            text(client,start,s)
+            text(client,start,s,y_init)
         #     mode=m_in["mode"] 
         #     if mode == "0x01":
         #         i2c.send_test(0x01)
