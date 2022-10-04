@@ -20,7 +20,7 @@
 #define Z_OUTPUT_MIN -500
 #define Z_OUTPUT_MAX 500
 #define Z_KP 1
-#define Z_KI 0.003
+#define Z_KI 1
 #define Z_KD 0
 volatile bool stale = false;
 uint8_t opcode;  // register
