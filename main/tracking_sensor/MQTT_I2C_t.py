@@ -23,6 +23,7 @@ def connect_mqtt():#連接伺服器
 def text(client: mqtt_client,times,s,y_init,z_init):
     i2c.ress()
     i2c.init(0x08,y_init,z_init)
+    zset=1
     while 1:
         print(time.time(),times,time.time()-times)
         if time.time()-times>s:
@@ -30,7 +31,10 @@ def text(client: mqtt_client,times,s,y_init,z_init):
             run()
             break
         y_data,z_data=i2c.send_test(mode=0x05)
-        if y_data==0:
+        if y_data==0 :
+            if zset==1:
+              i2c.init(0x08,0,z_init)  
+              zset=0
             y_data=round(z_data/2.5)
         else:
            z_data=0     
