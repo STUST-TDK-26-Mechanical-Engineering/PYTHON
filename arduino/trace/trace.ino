@@ -145,7 +145,7 @@ void receiveEvent(int bytes) {
 
   if (bytes > 1) {
 
-    if (opcode == 0x03) {
+    if (opcode == 0x03) {//歸零
       speed = Wire.read();
       // speed = Wire.read();
       myPID.reset();
@@ -158,20 +158,33 @@ void receiveEvent(int bytes) {
       Serial.println(speed);
       // Wire.write(4);
       // delay(500);
-    }else if(opcode == 0x08){
+    }else if(opcode == 0x08){//初始化設定
       int y1 = Wire.read();
       int y2=Wire.read();
+      int z1=Wire.read();
+      int z2=Wire.read();
       Serial.print(y1);
       Serial.print("\t");
       Serial.println(y2);
+      Serial.print(z1);
+      Serial.print("\t");
+      Serial.println(z2);
       int y_ouput=y1*pow(16,2)+y2;
+      int z_ouput=z1*pow(16,2)+z2;
       if (y1>128){
         y1=255-y1;
         y2=256-y2;
         y_ouput=-(y1*pow(16,2)+y2);
       }
-      input= y_ouput;        
-      Serial.println(y_ouput);      
+      if (z1>128){
+        z1=255-z1;
+        z2=256-z2;
+        z_ouput=-(z1*pow(16,2)+z2);
+      }
+      input= y_ouput; 
+      Z_input= z_ouput;        
+      Serial.println(y_ouput);
+      Serial.println(z_ouput);      
     }
     // if (opcode == REGISTER_SPEED) {
     //   speed = Wire.read();

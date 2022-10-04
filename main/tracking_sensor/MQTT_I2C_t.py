@@ -45,8 +45,9 @@ def subscribe(client: mqtt_client):#訂閱
         if m_in["msg"]=="i2c.teack":
             s=m_in["S"]
             y_init=m_in["y_init"]
+            z_init=m_in["z_init"]
             start = time.time()
-            text(client,start,s,y_init)
+            text(client,start,s,y_init,z_init)
         #     mode=m_in["mode"] 
         #     if mode == "0x01":
         #         i2c.send_test(0x01)
