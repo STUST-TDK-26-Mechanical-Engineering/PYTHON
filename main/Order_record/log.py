@@ -60,9 +60,12 @@ def on_message(client, userdata, msg):
             elif data["msg"]=="log.play" :
                 client.publish(topic="/bot/chassis", payload=msg, qos=0)
             elif data["msg"]=="pitching.play":
-                client.publish(topic="/bot/pitching", payload=msg, qos=0)  
+                client.publish(topic="/bot/pitching", payload=msg, qos=0)
+            elif data["msg"]=="i2c.teack":    
+                client.publish(topic="/bot/sensor/tracking", payload=msg, qos=0)
             client.loop_start()
             time.sleep(data["S"])
+        client.loop_forever()    
         print("a")    
 
 # 当客户端有日志信息时调用
