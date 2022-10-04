@@ -1,5 +1,6 @@
 [
    [1,{"msg": "log.play","X": -500,"Y": 0,"Z": 0,"S": 1}],
-   [1,{"msg": "i2c.teack","y_init":-250,"z_init":500,"S": 10}]
+   [1,{"msg": "i2c.teack","y_init":-250,"z_init":500,"S": 10}],
+   [1,{"msg": "log.play","X": -100,"Y": 0,"Z": 0,"S": 2}]
    
 ]
