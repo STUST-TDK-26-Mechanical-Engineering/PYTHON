@@ -43,7 +43,7 @@ def subscribe(client: mqtt_client):#訂閱
         print(m_in["msg"])
         
         if m_in["msg"]=="i2c.teack":
-            s=m_in["s"]
+            s=m_in["S"]
             y_init=m_in["y_init"]
             start = time.time()
             text(client,start,s,y_init)
