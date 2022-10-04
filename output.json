@@ -152,6 +152,14 @@
  [4,{"msg": "i2c.teack","y_init":-250,"z_init":-250,"S": 8}],
 
  [0,{"msg": "log.play","X": 0,"Y": 0,"Z": 0,"S": 0.5}],
- [5,{"msg": "log.play","X": -100,"Y": 0,"Z":0,"S":2}]
+ [5,{"msg": "log.play","X": -100,"Y": 0,"Z":0,"S":2}],
    
+ [0,{"msg": "i2c.test","mode":"0x02","S": 1}],
+ [0,{"msg": "i2c.test","mode":"0x01","S": 3}],
+ [0,{"msg": "i2c.test","mode":"0x02","S": 2}],
+ [0,{"msg": "i2c.test","mode":"0x01","S": 3}],
+
+ [0,{"msg": "i2c.test","mode":"0x02","S": 2}],
+ [0,{"msg": "i2c.test","mode":"0x01","S": 3}],
+ [0,{"msg": "i2c.test","mode":"0x02","S": 2}]
 ]
