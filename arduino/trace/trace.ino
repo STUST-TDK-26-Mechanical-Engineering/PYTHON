@@ -17,8 +17,8 @@
 #define KI 0.003
 #define KD 0
 
-#define Z_OUTPUT_MIN -255
-#define Z_OUTPUT_MAX 255
+#define Z_OUTPUT_MIN -500
+#define Z_OUTPUT_MAX 500
 #define Z_KP 1
 #define Z_KI 0.003
 #define Z_KD 0
@@ -74,16 +74,16 @@ void yData(){
 void zData(){
   if(digitalRead(DO2)&&digitalRead(DO3)){
     if (!digitalRead(RDO1)) {
-      Z_input -= 1;
+      Z_input -= 10;
     }
     if (!digitalRead(RDO2)) {
-      Z_input -= 2;
+      Z_input -= 5;
     }
     if (!digitalRead(RDO3)) {
-      Z_input += 1;
+      Z_input += 5;
     }
     if (!digitalRead(RDO4)) {
-      Z_input += 2;
+      Z_input += 10;
     }
   }
   
