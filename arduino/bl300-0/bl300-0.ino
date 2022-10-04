@@ -136,8 +136,9 @@ void receiveEvent(int bytes) {
       Serial.println(speed);
       Serial.println(opcode);
       sports(1);
-    } else if (opcode == 0x06) {
+    } else if (opcode == 0x01) {
       // speed = (Wire.read() == 1) ? 200 /* on */ : 0 /* off */;
+      speed = Wire.read();
       sports(0);
     }else if (opcode==0x03){//設定最高點位置
       SetUpperLimit(Wire.read());
