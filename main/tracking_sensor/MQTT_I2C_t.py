@@ -33,7 +33,7 @@ def text(client: mqtt_client,times,s,y_init,z_init):
         y_data,z_data=i2c.send_test(mode=0x05)
         if y_data==0 :
             if zset==1:
-              i2c.init(0x08,0,z_init)  
+              i2c.init(0x08,y_init,z_init)  
               zset=0
             y_data=round(z_data/2.5)
         else:
