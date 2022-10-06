@@ -29,7 +29,7 @@ class Auto_Run():
     def run(self):
         if self.ext == ".py":
             print ('start OK!')
-            self.p = subprocess.Popen(['python','%s' % self.cmd], stdin = sys.stdin,stdout = sys.stdout, stderr = sys.stderr, shell = False)
+            self.p = subprocess.Popen(['python3','%s' % self.cmd], stdin = sys.stdin,stdout = sys.stdout, stderr = sys.stderr, shell = False)
         else:
             pass
 app = Auto_Run(TIME,CMD)
