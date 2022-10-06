@@ -1,7 +1,7 @@
 import subprocess,time,sys
 
 TIME = 10                        #程序状态检测间隔（单位：分钟）
-CMD = "~/Documents/PYTHON/main/Order_record/log.py"#需要执行程序的绝对路径，支持jar 如：D:\\calc.exe 或者D:\\test.jar
+CMD = "/home/r201/Documents/PYTHON/main/Order_record/log.py"#需要执行程序的绝对路径，支持jar 如：D:\\calc.exe 或者D:\\test.jar
 
 
 
