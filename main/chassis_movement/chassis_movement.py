@@ -1,15 +1,18 @@
 from re import S, X
 # import struct
-import time
+import time,os
 import serial
 import threading
 class control():
     def __init__(self,portx,bps) -> None:
-        self.portx = portx
-        self.bps = bps
-        self.packet = bytearray()
-        self.z_data=0
-        self.ser = serial.Serial(self.portx, self.bps)
+        try:
+            self.portx = portx
+            self.bps = bps
+            self.packet = bytearray()
+            self.z_data=0
+            self.ser = serial.Serial(self.portx, self.bps)
+        except:
+            os._exit(0)    
     def coding(self,X=0,Y=0,Z=0):
         packet = bytearray() #創一個空的陣列 類型是bytearray
         # X=0
@@ -55,7 +58,10 @@ class control():
         time.sleep(s)
         self.packet=self.coding(0,0,0)
     def online(self):
-        self.ser.write(self.packet)     
+        try:
+            self.ser.write(self.packet)     
+        except:
+            os._exit(0)    
     def bytes2Hex(self,argv):        #十六进制显示 方法1
         try:
             result = ''  

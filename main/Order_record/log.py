@@ -3,7 +3,7 @@ import random
 import json
 import time
 from File_operations import log
-
+import os
 broker = 'r201_nx.local'
 port = 1883
 topic = "/bot/log"
@@ -67,7 +67,7 @@ def on_message(client, userdata, msg):
             time.sleep(data["S"])
         client.loop_forever()    
         print("a")    
-
+        os._exit(0)
 # 当客户端有日志信息时调用
 def on_log(client, obj, level, string):
     print("Log:" + string)
