@@ -40,17 +40,17 @@ class Auto_Run():
                     print ("chassis_movement 未正常運作 重起中...")
                     self.chassis_movement_run()
 
-                if self.log.poll() is None:
+                if self.log_p.poll() is None:
                     print ("log正常")
                 else:
                     print ("log 未正常運作 重起中...")
                     self.run()
-                if self.tracking_sensor.poll() is None:
+                if self.tracking_sensor_p.poll() is None:
                     print ("正常")
                 else:
                     print ("tracking_sensor 未正常運作 重起中...")
                     self.tracking_sensor_run()
-                if self.sensor.poll() is None:
+                if self.sensor_p.poll() is None:
                     print ("sensor 正常")
                 else:
                     print ("sensor 未正常運作 重起中...")
