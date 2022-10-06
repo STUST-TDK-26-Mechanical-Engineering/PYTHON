@@ -57,6 +57,10 @@ class Auto_Run():
                     self.run()                
         except KeyboardInterrupt as e:
             print ("检测到CTRL+C,准备退出程序!")
+            self.chassis_movement_p.kill()
+            self.log_p.kill()
+            self.tracking_sensor_p.kill()
+            self.sensor_p.kill()
 #            self.p.kill()                   #检测到CTRL+C时，kill掉CMD中启动的exe或者jar程序
 
     def chassis_movement_run(self):
