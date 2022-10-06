@@ -74,13 +74,13 @@ class Auto_Run():
     def tracking_sensor_run(self):
         if self.tracking_sensor_ext == ".py":
             print ('tracking_sensor_start OK!')
-            self.tracking_sensor_p = subprocess.Popen(['sudo','python3','%s' % self.cmd], stdin = sys.stdin,stdout = sys.stdout, stderr = sys.stderr, shell = False)
+            self.tracking_sensor_p = subprocess.Popen(['python3','%s' % self.cmd], stdin = sys.stdin,stdout = sys.stdout, stderr = sys.stderr, shell = False)
         else:
             pass
     def sensor_run(self):
         if self.sensor_ext == ".py":
             print ('sensor_run_start OK!')
-            self.sensor_p = subprocess.Popen(['sudo','python3','%s' % self.cmd], stdin = sys.stdin,stdout = sys.stdout, stderr = sys.stderr, shell = False)
+            self.sensor_p = subprocess.Popen(['python3','%s' % self.cmd], stdin = sys.stdin,stdout = sys.stdout, stderr = sys.stderr, shell = False)
         else:
             pass
     # def run(self):
