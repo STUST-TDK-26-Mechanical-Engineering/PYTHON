@@ -77,14 +77,17 @@ class control():
         return result
     
     def res(self):
-        # a=0
-        # f = open('test.txt','w') 
-        while self.ser.isOpen():
-            num = self.ser.inWaiting()   #查询串口接收字节数据，非阻塞
-            if num:
-                line = self.ser.read(num)  
-                self.online() 
-                    
+        try:
+            # a=0
+            # f = open('test.txt','w') 
+            while self.ser.isOpen():
+                num = self.ser.inWaiting()   #查询串口接收字节数据，非阻塞
+                if num:
+                    line = self.ser.read(num)  
+                    self.online() 
+        except:
+            print("底盤串口通訊錯誤")            
+            os._exit(0)        
     def res2(self):
         while 1:
             datahex = self.ser2.read(33)
