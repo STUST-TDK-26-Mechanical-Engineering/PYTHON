@@ -31,7 +31,7 @@ def run():
     GPIO.setmode(GPIO.BOARD)
     mode = GPIO.getmode()
     print(mode)
-    channel=40
+    channel=32
     GPIO.setup(channel, GPIO.IN)
     # client.loop_start()
     while 1:
