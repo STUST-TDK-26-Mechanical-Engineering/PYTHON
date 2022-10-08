@@ -1,5 +1,6 @@
 import Jetson.GPIO as GPIO
 from paho.mqtt import client as mqtt_client
+import time
 import random
 import json
 broker = 'r201_nx.local'
@@ -38,6 +39,8 @@ def run():
         print(GPIO.input(channel))
         if GPIO.input(channel):
             go(client)
+            time.sleep(5)
+
         client.loop_start()    
     # subscribe(client)
     
