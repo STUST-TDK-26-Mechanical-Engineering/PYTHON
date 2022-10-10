@@ -42,7 +42,7 @@ def run():
     GPIO.setup(a1, GPIO.IN)
     GPIO.setup(led1, GPIO.OUT,initial=GPIO.HIGH)
     GPIO.setup(led2, GPIO.OUT,initial=GPIO.HIGH)
-
+    time.sleep(1)
     GPIO.setup(channel, GPIO.IN)
     GPIO.setup(a2, GPIO.IN)
     # client.loop_start()
