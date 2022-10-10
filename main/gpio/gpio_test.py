@@ -6,7 +6,7 @@ import json
 broker = 'r201_nx.local'
 port = 1883
 # topic = "/bot/chassis"
-client_id = f'chassis-{random.randint(0, 1000)}'
+client_id = f'gpio-{random.randint(0, 1000)}'
 def connect_mqtt():#連接伺服器
     def on_connect(client, userdata, flags, rc):
         if rc == 0:
@@ -20,8 +20,8 @@ def connect_mqtt():#連接伺服器
     return client
 def go(client: mqtt_client):
 
-    
-    client.publish(topic="/bot/log", payload=json.dumps({"msg": "log.play"}), qos=0)
+    print("go")
+    # client.publish(topic="/bot/log", payload=json.dumps({"msg": "log.play"}), qos=0)
       
             
     # client.subscribe(topic)
@@ -33,10 +33,12 @@ def run():
     mode = GPIO.getmode()
     print(mode)
     channel=32
+    a1=29
+    a2=31
     GPIO.setup(channel, GPIO.IN)
     # client.loop_start()
     while 1:
-        print(GPIO.input(channel))
+        print(GPIO.input(channel),GPIO.input(a1),GPIO.input(a2))
         if GPIO.input(channel):
             go(client)
             time.sleep(5)
