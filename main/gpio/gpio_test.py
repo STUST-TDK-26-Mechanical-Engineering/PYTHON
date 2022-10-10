@@ -40,8 +40,8 @@ def run():
     led1=15
     led2=33
     GPIO.setup(a1, GPIO.IN)
-    GPIO.setup(led1, GPIO.OUT,initial=GPIO.LOW)
-    GPIO.setup(led2, GPIO.OUT,initial=GPIO.LOW)
+    GPIO.setup(led1, GPIO.OUT,initial=GPIO.HIGH)
+    GPIO.setup(led2, GPIO.OUT,initial=GPIO.HIGH)
 
     GPIO.setup(channel, GPIO.IN)
     GPIO.setup(a2, GPIO.IN)
