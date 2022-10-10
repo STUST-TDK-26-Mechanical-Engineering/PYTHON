@@ -59,6 +59,11 @@ def run():
             client.loop_start()    
         # subscribe(client)
     except KeyboardInterrupt as e:
+        GPIO.output(led1, GPIO.HIGH)
+        GPIO.output(led2, GPIO.HIGH)
+        time.sleep(1)
+        GPIO.output(led1, GPIO.LOW)
+        GPIO.output(led2, GPIO.LOW)
         GPIO.cleanup()    
     
     # client.loop_forever()
