@@ -6,10 +6,13 @@
 #define Sp 11 //調轉速腳位 ADJ
 #define BR 12 //煞車腳位(高電位放煞車低電位煞車) BRK
 #define SG 2 //讀取訊號腳位 PLS(中斷控制)（脈波訊號接收）
+
 // #define CL A5 //控制訊號腳位 可變電阻
 #define limitSwitch 5//限位器腳位
 #define  I2C_ADDRESS 0x42 //主機位置
 #define EEPROM_MODE true //啟用EEPROM儲存資料（啟用後主轉速與最高角度將會以記憶體內為主，如需要修改請使用SetSped()/SetUpperLimit())
+#define motor_L 6 //線性制動器驅動L/R其中一條通5V即可驅動正反轉（H橋電路）
+#define motor_R 7 //線性制動器驅動
 bool Correction=false;//用來判斷校正模式
 uint8_t opcode; // register
 uint8_t speed;  // fan speed: 0=off, 150=low, 200=medium, 250=high
@@ -30,6 +33,9 @@ void setup() {
   pinMode(BR, OUTPUT);
   pinMode(SG, INPUT);
   pinMode(limitSwitch, INPUT);
+  pinMode(motor_L,OUTPUT);   
+  pinMode(motor_R,OUTPUT);  
+  LinearActuatorStop();
   Wire.begin(I2C_ADDRESS);//初始化i2c
   Wire.onRequest(requestEvent);
   Wire.onReceive(receiveEvent);
@@ -57,8 +63,7 @@ void EEPROM_init(){
   Serial.print("\nsped:");
   Serial.print(sped);
 }
-void loop() {
-}
+void loop() {}
 int turn(int a)
 {
 	a = ~a + 1;
@@ -82,8 +87,18 @@ void SetUpperLimit(int val){//設定轉向最高位置
   UpperLimit= val; 
 }
 //####################END#######################
-
-
+void LinearActuatorStop(){
+  digitalWrite(motor_L,LOW);
+  digitalWrite(motor_R,LOW);
+}
+void LinearActuatorUp(){
+  digitalWrite(motor_L,HIGH);
+  digitalWrite(motor_R,LOW);
+}
+void LinearActuatorDecline(){
+  digitalWrite(motor_L,LOW);
+  digitalWrite(motor_R,HIGH);
+}
 /*#################################################
   #                                               #
   #            馬達轉控制主要函式                    #
@@ -149,6 +164,15 @@ void receiveEvent(int bytes) {
       EEPROM.write(0xA1,turn(UpperLimit));//寫入永久記憶體最高點位置
       EEPROM.write(0xA2,sped);//寫入永久記憶體轉速
       Serial.print("EEPROM_write");
+    }else if (opcode==0x07){
+      SetSped(Wire.read());
+      LinearActuatorStop();
+    }else if (opcode==0x08){
+      SetSped(Wire.read());
+      LinearActuatorUp();
+    }else if (opcode==0x09){
+      SetSped(Wire.read());
+      LinearActuatorDecline();
     }
   }
 }
