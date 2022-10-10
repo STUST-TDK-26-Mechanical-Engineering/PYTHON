@@ -35,7 +35,9 @@ def run():
     channel=32
     a1=29
     a2=31
+    GPIO.setup(a1, GPIO.IN)
     GPIO.setup(channel, GPIO.IN)
+    GPIO.setup(a2, GPIO.IN)
     # client.loop_start()
     while 1:
         print(GPIO.input(channel),GPIO.input(a1),GPIO.input(a2))
