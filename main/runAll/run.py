@@ -6,28 +6,33 @@ chassis_movement ="/home/r201/Documents/PYTHON/main/chassis_movement/MQTT.py"
 log="/home/r201/Documents/PYTHON/main/Order_record/log.py"
 tracking_sensor="/home/r201/Documents/PYTHON/main/tracking_sensor/MQTT_I2C_t.py"
 sensor="/home/r201/Documents/PYTHON/main/sensor/MQTT_I2C.py"
+gpio="/home/r201/Documents/PYTHON/main/gpio/gpio_test.py"
 class Auto_Run():
-    def __init__(self,sleep_time,chassis_movement,log,tracking_sensor,sensor):
+    def __init__(self,sleep_time,chassis_movement,log,tracking_sensor,sensor,gpio):
         self.sleep_time = sleep_time
         self.chassis_movement = chassis_movement
         self.log=log
         self.tracking_sensor=tracking_sensor
         self.sensor=sensor
+        self.gpio=gpio
 
         self.chassis_ext = (chassis_movement[-3:]).lower()        #判断文件的后缀名，全部换成小写
         self.log_ext = (log[-3:]).lower()
         self.tracking_sensor_ext = (tracking_sensor[-3:]).lower()
         self.sensor_ext = (sensor[-3:]).lower()
+        self.gpio_ext=(gpio[-3:]).lower()
 
         self.chassis_movement_p = None                        #self.p为subprocess.Popen()的返回值，初始化为None
         self.log_p = None
         self.tracking_sensor_p = None
         self.sensor_p = None
+        self.gpio_p=None
         # self.p = None
         self.chassis_movement_run() 
         self.log_run()
         self.tracking_sensor_run()
         self.sensor_run()
+        self.gpio_run()
         # self.run()                          #启动时先执行一次程序
 
         try:
@@ -61,6 +66,7 @@ class Auto_Run():
             self.log_p.kill()
             self.tracking_sensor_p.kill()
             self.sensor_p.kill()
+            self.gpio_p.kill()
 #            self.p.kill()                   #检测到CTRL+C时，kill掉CMD中启动的exe或者jar程序
 
     def chassis_movement_run(self):
@@ -87,6 +93,12 @@ class Auto_Run():
             self.sensor_p = subprocess.Popen(['python3','%s' % self.sensor], stdin = sys.stdin,stdout = sys.stdout, stderr = sys.stderr, shell = False)
         else:
             pass
+    def gpio_run(self):
+        if self.gpio_ext == ".py":
+            print ('gpio_run_start OK!')
+            self.gpio_p = subprocess.Popen(['python3','%s' % self.gpio], stdin = sys.stdin,stdout = sys.stdout, stderr = sys.stderr, shell = False)
+        else:
+            pass   
     # def run(self):
     #     if self.ext == ".py":
     #         print ('start OK!')
@@ -95,4 +107,4 @@ class Auto_Run():
     #         pass                
 app = Auto_Run(sleep_time=TIME,chassis_movement=chassis_movement,
                 log=log,tracking_sensor=tracking_sensor,
-                sensor=sensor)
+                sensor=sensor,gpio=gpio)
