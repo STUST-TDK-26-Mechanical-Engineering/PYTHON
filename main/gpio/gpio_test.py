@@ -21,8 +21,8 @@ def connect_mqtt():#連接伺服器
 def go(client: mqtt_client,led1,led2):
 
     print("go")
-    GPIO.output(led1, GPIO.HIGH)
-    GPIO.output(led2, GPIO.LOW)
+    GPIO.output(led2, GPIO.HIGH)
+    GPIO.output(led1, GPIO.LOW)
     # client.publish(topic="/bot/log", payload=json.dumps({"msg": "log.play"}), qos=0)
       
             
