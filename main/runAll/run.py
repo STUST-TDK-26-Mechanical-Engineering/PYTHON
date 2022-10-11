@@ -63,7 +63,7 @@ class Auto_Run():
                 else:
                     print ("log 未正常運作 重起中...")
                     self.log_run()
-                    
+
                 if self.tracking_sensor_p.poll() is None:
                     print ("正常")
                 else:
@@ -74,7 +74,13 @@ class Auto_Run():
                     print ("sensor 正常")
                 else:
                     print ("sensor 未正常運作 重起中...")
-                    self.sensor_run()                
+                    self.sensor_run()
+
+                if self.gpio_p.poll() is None:
+                    print ("gpio 正常")
+                else:
+                    print ("gpio 未正常運作 重起中...")
+                    self.gpio_run()                     
         except KeyboardInterrupt as e:
             print ("检测到CTRL+C,准备退出程序!")
             self.chassis_movement_p.kill()
