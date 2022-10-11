@@ -71,9 +71,9 @@ class Auto_Run():
                     self.tracking_sensor_p.kill()
                     self.sensor_p.kill()
                     # self.gpio_p.kill()
-                    GPIO.cleanup()
-                    GPIO.setmode(GPIO.BOARD)
-                    GPIO.setup(res_b, GPIO.IN)
+                    # GPIO.cleanup()
+                    # GPIO.setmode(GPIO.BOARD)
+                    # GPIO.setup(res_b, GPIO.IN)
                 if  GPIO.input(channel):
                     GPIO.output(led2, GPIO.HIGH)
                     GPIO.output(led1, GPIO.LOW)
