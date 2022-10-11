@@ -12,7 +12,7 @@ sensor="/home/r201/Documents/PYTHON/main/sensor/MQTT_I2C.py"
 gpio="/home/r201/Documents/PYTHON/main/gpio/gpio_test.py"
 class Auto_Run():
     def __init__(self,sleep_time,chassis_movement,log,tracking_sensor,sensor,gpio):
-        res_b=36
+        res_b=7
         
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(res_b, GPIO.IN)
