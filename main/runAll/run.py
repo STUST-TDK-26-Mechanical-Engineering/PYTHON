@@ -10,9 +10,9 @@ gpio="/home/r201/Documents/PYTHON/main/gpio/gpio_test.py"
 class Auto_Run():
     def __init__(self,sleep_time,chassis_movement,log,tracking_sensor,sensor,gpio):
         res_b=36
-        self.GPIO_DATA=GPIO
-        self.GPIO_DATA.setup(res_b, GPIO.IN)
-        self.GPIO_DATA.setmode(GPIO.BOARD)
+        
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(res_b, GPIO.IN)
         self.sleep_time = sleep_time
         self.chassis_movement = chassis_movement
         self.log=log
@@ -41,7 +41,7 @@ class Auto_Run():
 
         try:
             while 1:
-                print("gpio:",self.GPIO_DATA.input(res_b))
+                print("gpio:",GPIO.input(res_b))
                 time.sleep(sleep_time )  #休息10分钟，判断程序状态
                 # self.poll = self.p.poll()    #判断程序进程是否存在，None：表示程序正在运行 其他值：表示程序已退出
                 if self.chassis_movement_p.poll() is None:
