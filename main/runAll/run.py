@@ -62,7 +62,7 @@ class Auto_Run():
             while 1:
                 
                 print("gpio:",GPIO.input(res_b))
-                if GPIO.input(res_b)==0:
+                if GPIO.input(res_b)==1:
                     print("重起中")
                     GPIO.output(led1, GPIO.LOW)
                     GPIO.output(led2, GPIO.LOW)
@@ -79,7 +79,7 @@ class Auto_Run():
                     GPIO.output(led2, GPIO.HIGH)
                     GPIO.output(led1, GPIO.LOW)
                     self.connect_mqtt()
-                    time.sleep(5)
+                    time.sleep(3)
                 time.sleep(sleep_time )  #休息10分钟，判断程序状态
                 # self.poll = self.p.poll()    #判断程序进程是否存在，None：表示程序正在运行 其他值：表示程序已退出
                 
