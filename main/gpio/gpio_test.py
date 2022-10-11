@@ -52,7 +52,7 @@ def run():
 
         # client.loop_start()
         while 1:
-            print(GPIO.input(channel),GPIO.input(a1),GPIO.input(a2),GPIO.input(res_b))
+            print(GPIO.input(channel),GPIO.input(a1),GPIO.input(a2))
             time.sleep(0.5)
             GPIO.output(led1, GPIO.HIGH)
             GPIO.output(led2, GPIO.LOW)
