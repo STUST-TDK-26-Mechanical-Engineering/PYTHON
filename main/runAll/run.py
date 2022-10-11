@@ -1,5 +1,8 @@
 import subprocess,time,sys
 import Jetson.GPIO as GPIO
+import json
+from paho.mqtt import client as mqtt_client
+import random
 TIME = 1                        #程序状态检测间隔（单位：分钟）
 # CMD = "/home/r201/Documents/PYTHON/main/Order_record/log.py"#需要执行程序的绝对路径，支持jar 如：D:\\calc.exe 或者D:\\test.jar
 chassis_movement ="/home/r201/Documents/PYTHON/main/chassis_movement/MQTT.py"
@@ -13,6 +16,20 @@ class Auto_Run():
         
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(res_b, GPIO.IN)
+        channel=32
+        # res_b=36
+        a1=29
+        a2=31
+        led1=15
+        led2=33
+        GPIO.setup(a1, GPIO.IN)
+        # GPIO.setup(res_b, GPIO.IN)
+        GPIO.setup(led1, GPIO.OUT,initial=GPIO.HIGH)
+        GPIO.setup(led2, GPIO.OUT,initial=GPIO.HIGH)
+        time.sleep(1)
+        GPIO.setup(channel, GPIO.IN)
+        GPIO.setup(a2, GPIO.IN)
+
         self.sleep_time = sleep_time
         self.chassis_movement = chassis_movement
         self.log=log
@@ -36,23 +53,31 @@ class Auto_Run():
         self.log_run()
         self.tracking_sensor_run()
         self.sensor_run()
-        self.gpio_run()
+        # self.gpio_run()
         # self.run()                          #启动时先执行一次程序
 
         try:
+            GPIO.output(led1, GPIO.HIGH)
+            GPIO.output(led2, GPIO.LOW)
             while 1:
+                
                 print("gpio:",GPIO.input(res_b))
                 if GPIO.input(res_b)==0:
                     print("重起中")
+                    GPIO.output(led1, GPIO.LOW)
+                    GPIO.output(led2, GPIO.LOW)
                     self.chassis_movement_p.kill()
                     self.log_p.kill()
                     self.tracking_sensor_p.kill()
                     self.sensor_p.kill()
-                    self.gpio_p.kill()
+                    # self.gpio_p.kill()
                     GPIO.cleanup()
                     GPIO.setmode(GPIO.BOARD)
                     GPIO.setup(res_b, GPIO.IN)
-                    
+                if  GPIO.input(channel):
+                    GPIO.output(led2, GPIO.HIGH)
+                    GPIO.output(led1, GPIO.LOW)
+                    self.connect_mqtt()
                 time.sleep(sleep_time )  #休息10分钟，判断程序状态
                 # self.poll = self.p.poll()    #判断程序进程是否存在，None：表示程序正在运行 其他值：表示程序已退出
                 
@@ -80,15 +105,15 @@ class Auto_Run():
                     print ("sensor 未正常運作 重起中...")
                     self.sensor_run()
 
-                if self.gpio_p.poll() is None:
-                    print ("gpio 正常")
-                else:
-                    print ("gpio 未正常運作 重起中...")
-                    GPIO.cleanup()
-                    self.gpio_run()
+                # if self.gpio_p.poll() is None:
+                #     print ("gpio 正常")
+                # else:
+                #     print ("gpio 未正常運作 重起中...")
+                #     GPIO.cleanup()
+                #     self.gpio_run()
                     
-                    GPIO.setmode(GPIO.BOARD)
-                    GPIO.setup(res_b, GPIO.IN)                     
+                #     GPIO.setmode(GPIO.BOARD)
+                #     GPIO.setup(res_b, GPIO.IN)                     
         except KeyboardInterrupt as e:
             print ("检测到CTRL+C,准备退出程序!")
             self.chassis_movement_p.kill()
@@ -96,8 +121,21 @@ class Auto_Run():
             self.tracking_sensor_p.kill()
             self.sensor_p.kill()
             self.gpio_p.kill()
-#            self.p.kill()                   #检测到CTRL+C时，kill掉CMD中启动的exe或者jar程序
-
+            #self.p.kill()                   #检测到CTRL+C时，kill掉CMD中启动的exe或者jar程序
+    def connect_mqtt(self):#連接伺服器
+        def on_connect(client, userdata, flags, rc):
+            if rc == 0:
+                print("Connected to MQTT Broker!")
+            else:
+                print("Failed to connect, return code %d\n", rc)
+        broker = 'r201_nx.local'
+        port = 1883
+        client_id = f'gpio-{random.randint(0, 1000)}'
+        client = mqtt_client.Client(client_id)
+        client.on_connect = on_connect
+        client.connect(broker, port)
+        client.loop_start()
+        client.publish(topic="/bot/log", payload=json.dumps({"msg": "log.play"}), qos=0)
     def chassis_movement_run(self):
         if self.chassis_ext == ".py":
             print ('chassis_movement_start OK!')
