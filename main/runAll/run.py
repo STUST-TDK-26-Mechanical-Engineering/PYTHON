@@ -48,6 +48,7 @@ class Auto_Run():
                     self.log_p.kill()
                     self.tracking_sensor_p.kill()
                     self.sensor_p.kill()
+                    GPIO.cleanup()
                     # self.gpio_p.kill()
                 time.sleep(sleep_time )  #休息10分钟，判断程序状态
                 # self.poll = self.p.poll()    #判断程序进程是否存在，None：表示程序正在运行 其他值：表示程序已退出
