@@ -18,7 +18,7 @@ class Auto_Run():
         self.led1=15
         self.led2=33
         self.channel=32
-
+        self.mood=False
         self.sleep_time = sleep_time
         self.chassis_movement = chassis_movement
         self.log=log
@@ -52,7 +52,7 @@ class Auto_Run():
             while 1:
                 
                 print("gpio:",GPIO.input(self.res_b),GPIO.input(self.channel))
-                if GPIO.input(self.res_b):
+                if GPIO.input(self.res_b) and self.mood:
                     print("重起中")
                     GPIO.cleanup()
                     self.gpio_init()
@@ -62,17 +62,19 @@ class Auto_Run():
                     self.log_p.kill()
                     self.tracking_sensor_p.kill()
                     self.sensor_p.kill()
+                    self.mood=False
                     time.sleep(3)
                     # self.gpio_p.kill()
                     # GPIO.cleanup()
                     # GPIO.setmode(GPIO.BOARD)
                     # GPIO.setup(res_b, GPIO.IN)
-                if  GPIO.input(self.channel):
+                if  GPIO.input(self.channel) and not self.mood:
                     GPIO.cleanup()
                     self.gpio_init()
                     GPIO.output(self.led2, GPIO.HIGH)
                     GPIO.output(self.led1, GPIO.LOW)
                     self.connect_mqtt()
+                    self.mood=True
                     time.sleep(3)
                 time.sleep(sleep_time )  #休息10分钟，判断程序状态
                 # self.poll = self.p.poll()    #判断程序进程是否存在，None：表示程序正在运行 其他值：表示程序已退出
