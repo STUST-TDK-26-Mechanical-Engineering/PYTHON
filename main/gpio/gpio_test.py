@@ -37,19 +37,22 @@ def run():
         mode = GPIO.getmode()
         print(mode)
         channel=32
+        res_b=36
         a1=29
         a2=31
         led1=15
         led2=33
         GPIO.setup(a1, GPIO.IN)
+        GPIO.setup(res_b, GPIO.IN)
         GPIO.setup(led1, GPIO.OUT,initial=GPIO.HIGH)
         GPIO.setup(led2, GPIO.OUT,initial=GPIO.HIGH)
         time.sleep(1)
         GPIO.setup(channel, GPIO.IN)
         GPIO.setup(a2, GPIO.IN)
+
         # client.loop_start()
         while 1:
-            print(GPIO.input(channel),GPIO.input(a1),GPIO.input(a2))
+            print(GPIO.input(channel),GPIO.input(a1),GPIO.input(a2),GPIO.input(res_b))
             GPIO.output(led1, GPIO.HIGH)
             GPIO.output(led2, GPIO.LOW)
             if GPIO.input(channel):
