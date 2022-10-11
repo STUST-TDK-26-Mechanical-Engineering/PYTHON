@@ -1,5 +1,5 @@
 import subprocess,time,sys
-
+import Jetson.GPIO as GPIO
 TIME = 1                        #程序状态检测间隔（单位：分钟）
 # CMD = "/home/r201/Documents/PYTHON/main/Order_record/log.py"#需要执行程序的绝对路径，支持jar 如：D:\\calc.exe 或者D:\\test.jar
 chassis_movement ="/home/r201/Documents/PYTHON/main/chassis_movement/MQTT.py"
@@ -9,6 +9,9 @@ sensor="/home/r201/Documents/PYTHON/main/sensor/MQTT_I2C.py"
 gpio="/home/r201/Documents/PYTHON/main/gpio/gpio_test.py"
 class Auto_Run():
     def __init__(self,sleep_time,chassis_movement,log,tracking_sensor,sensor,gpio):
+        res_b=36
+        self.GPIO_DATA=GPIO
+        self.GPIO_DATA.setup(res_b, GPIO.IN)
         self.sleep_time = sleep_time
         self.chassis_movement = chassis_movement
         self.log=log
@@ -37,6 +40,7 @@ class Auto_Run():
 
         try:
             while 1:
+                print("gpio:",self.GPIO_DATA.input(res_b))
                 time.sleep(sleep_time )  #休息10分钟，判断程序状态
                 # self.poll = self.p.poll()    #判断程序进程是否存在，None：表示程序正在运行 其他值：表示程序已退出
                 if self.chassis_movement_p.poll() is None:
