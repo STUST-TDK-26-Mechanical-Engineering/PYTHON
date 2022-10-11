@@ -3,7 +3,7 @@ Description=TDK RUN
 
 [Service]
 Type=simple
-ExecStart=python3 /main/runAll/run.py
+ExecStart=/usr/bin/python3 /main/runAll/run.py
 # Restart=always
 # 執行時的工作目錄
 WorkingDirectory=/home/r201/Documents/PYTHON/
