@@ -69,16 +69,28 @@ class Auto_Run():
                     # GPIO.setmode(GPIO.BOARD)
                     # GPIO.setup(res_b, GPIO.IN)
                 if  GPIO.input(self.channel) and not self.mood:
-                    modeAB=GPIO.input(self.a2)
+                    modeAB=GPIO.input(self.a1)
+                    modeRES=GPIO.input(self.a2)
                     if modeAB:
-                        print("執行A場地")
-                        time.sleep(3)
-                        self.connect_mqtt("A")
+                        if modeRES:
+                            print("執行A場地")
+                            time.sleep(3)
+                            self.connect_mqtt("A")
+                        else :
+                            print("執行A場地RES_未設定")
+                            time.sleep(3)
+
+                            # self.connect_mqtt("A")    
                         
                     else:
-                        print("執行B場地") 
-                        time.sleep(3) 
-                        self.connect_mqtt("B")  
+                        if modeRES:
+                            print("執行B場地") 
+                            time.sleep(3) 
+                            self.connect_mqtt("B") 
+                        else:
+                            print("執行B場地_res") 
+                            time.sleep(3) 
+                            self.connect_mqtt("B_RE")    
                         
                     GPIO.cleanup()
                     self.gpio_init()
