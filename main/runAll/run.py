@@ -42,8 +42,16 @@ class Auto_Run():
         try:
             while 1:
                 print("gpio:",GPIO.input(res_b))
+                if GPIO.input(res_b)==0:
+                    print("重起中")
+                    self.chassis_movement_p.kill()
+                    self.log_p.kill()
+                    self.tracking_sensor_p.kill()
+                    self.sensor_p.kill()
+                    self.gpio_p.kill()
                 time.sleep(sleep_time )  #休息10分钟，判断程序状态
                 # self.poll = self.p.poll()    #判断程序进程是否存在，None：表示程序正在运行 其他值：表示程序已退出
+                
                 if self.chassis_movement_p.poll() is None:
                     print ("chassis_movement正常")
                 else:
