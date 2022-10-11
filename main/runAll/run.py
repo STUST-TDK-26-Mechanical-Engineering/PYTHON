@@ -12,23 +12,12 @@ sensor="/home/r201/Documents/PYTHON/main/sensor/MQTT_I2C.py"
 gpio="/home/r201/Documents/PYTHON/main/gpio/gpio_test.py"
 class Auto_Run():
     def __init__(self,sleep_time,chassis_movement,log,tracking_sensor,sensor,gpio):
-        res_b=7
-        
-        GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(res_b, GPIO.IN)
-        channel=32
-        # res_b=36
-        a1=29
-        a2=31
-        led1=15
-        led2=33
-        GPIO.setup(a1, GPIO.IN)
-        # GPIO.setup(res_b, GPIO.IN)
-        GPIO.setup(led1, GPIO.OUT,initial=GPIO.HIGH)
-        GPIO.setup(led2, GPIO.OUT,initial=GPIO.HIGH)
-        time.sleep(1)
-        GPIO.setup(channel, GPIO.IN)
-        GPIO.setup(a2, GPIO.IN)
+        self.res_b=7
+        self.a1=29
+        self.a2=31
+        self.led1=15
+        self.led2=33
+       
 
         self.sleep_time = sleep_time
         self.chassis_movement = chassis_movement
@@ -57,15 +46,18 @@ class Auto_Run():
         # self.run()                          #启动时先执行一次程序
 
         try:
-            GPIO.output(led1, GPIO.HIGH)
-            GPIO.output(led2, GPIO.LOW)
+            self.gpio_init()
+            GPIO.output(self.led1, GPIO.HIGH)
+            GPIO.output(self.led2, GPIO.LOW)
             while 1:
                 
-                print("gpio:",GPIO.input(res_b),GPIO.input(channel))
-                if GPIO.input(res_b):
+                print("gpio:",GPIO.input(self.res_b),GPIO.input(self.channel))
+                if GPIO.input(self.res_b):
                     print("重起中")
-                    GPIO.output(led1, GPIO.LOW)
-                    GPIO.output(led2, GPIO.LOW)
+                    GPIO.cleanup()
+                    self.gpio_init()
+                    GPIO.output(self.led1, GPIO.LOW)
+                    GPIO.output(self.led2, GPIO.LOW)
                     self.chassis_movement_p.kill()
                     self.log_p.kill()
                     self.tracking_sensor_p.kill()
@@ -75,9 +67,11 @@ class Auto_Run():
                     # GPIO.cleanup()
                     # GPIO.setmode(GPIO.BOARD)
                     # GPIO.setup(res_b, GPIO.IN)
-                if  GPIO.input(channel):
-                    GPIO.output(led2, GPIO.HIGH)
-                    GPIO.output(led1, GPIO.LOW)
+                if  GPIO.input(self.channel):
+                    GPIO.cleanup()
+                    self.gpio_init()
+                    GPIO.output(self.led2, GPIO.HIGH)
+                    GPIO.output(self.led1, GPIO.LOW)
                     self.connect_mqtt()
                     time.sleep(3)
                 time.sleep(sleep_time )  #休息10分钟，判断程序状态
@@ -117,9 +111,13 @@ class Auto_Run():
                     good=False
                     self.sensor_run()
                 if good:
-                   GPIO.output(led1, GPIO.HIGH)
+                    GPIO.cleanup()
+                    self.gpio_init()
+                    GPIO.output(self.led1, GPIO.HIGH)
                 else:
-                   GPIO.output(led1, GPIO.LOW)    
+                    GPIO.cleanup()
+                    self.gpio_init()
+                    GPIO.output(self.led1, GPIO.LOW)    
                 # if self.gpio_p.poll() is None:
                 #     print ("gpio 正常")
                 # else:
@@ -151,6 +149,19 @@ class Auto_Run():
         client.connect(broker, port)
         client.loop_start()
         client.publish(topic="/bot/log", payload=json.dumps({"msg": "log.play"}), qos=0)
+    def gpio_init(self):
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(self.res_b, GPIO.IN)
+        channel=32
+        # res_b=36
+        
+        GPIO.setup(self.a1, GPIO.IN)
+        # GPIO.setup(res_b, GPIO.IN)
+        GPIO.setup(self.led1, GPIO.OUT,initial=GPIO.HIGH)
+        GPIO.setup(self.led2, GPIO.OUT,initial=GPIO.HIGH)
+        time.sleep(1)
+        GPIO.setup(channel, GPIO.IN)
+        GPIO.setup(self.a2, GPIO.IN)
     def chassis_movement_run(self):
         if self.chassis_ext == ".py":
             print ('chassis_movement_start OK!')
