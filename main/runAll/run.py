@@ -71,11 +71,15 @@ class Auto_Run():
                 if  GPIO.input(self.channel) and not self.mood:
                     modeAB=GPIO.input(self.a2)
                     if modeAB:
-                        self.connect_mqtt("A")
                         print("執行A場地")
+                        time.sleep(3)
+                        self.connect_mqtt("A")
+                        
                     else:
+                        print("執行B場地") 
+                        time.sleep(3) 
                         self.connect_mqtt("B")  
-                        print("執行B場地")  
+                        
                     GPIO.cleanup()
                     self.gpio_init()
                     GPIO.output(self.led2, GPIO.HIGH)
