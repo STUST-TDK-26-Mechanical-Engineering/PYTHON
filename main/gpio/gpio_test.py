@@ -23,7 +23,7 @@ def go(client: mqtt_client,GPIO,led1,led2):
     GPIO.output(led1, GPIO.LOW)
     print("go")
     
-    # client.publish(topic="/bot/log", payload=json.dumps({"msg": "log.play"}), qos=0)
+    client.publish(topic="/bot/log", payload=json.dumps({"msg": "log.play"}), qos=0)
       
             
     # client.subscribe(topic)
@@ -53,7 +53,7 @@ def run():
         # client.loop_start()
         while 1:
             print(GPIO.input(channel),GPIO.input(a1),GPIO.input(a2))
-            time.sleep(0.5)
+            # time.sleep(0.5)
             GPIO.output(led1, GPIO.HIGH)
             GPIO.output(led2, GPIO.LOW)
             if GPIO.input(channel):
