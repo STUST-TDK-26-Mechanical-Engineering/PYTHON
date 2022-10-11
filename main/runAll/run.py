@@ -62,7 +62,7 @@ class Auto_Run():
             while 1:
                 
                 print("gpio:",GPIO.input(res_b))
-                if GPIO.input(res_b)==1:
+                if GPIO.input(res_b):
                     print("重起中")
                     GPIO.output(led1, GPIO.LOW)
                     GPIO.output(led2, GPIO.LOW)
@@ -70,7 +70,7 @@ class Auto_Run():
                     self.log_p.kill()
                     self.tracking_sensor_p.kill()
                     self.sensor_p.kill()
-                    time.sleep(5)
+                    time.sleep(3)
                     # self.gpio_p.kill()
                     # GPIO.cleanup()
                     # GPIO.setmode(GPIO.BOARD)
@@ -82,31 +82,44 @@ class Auto_Run():
                     time.sleep(3)
                 time.sleep(sleep_time )  #休息10分钟，判断程序状态
                 # self.poll = self.p.poll()    #判断程序进程是否存在，None：表示程序正在运行 其他值：表示程序已退出
-                
+                good=False
                 if self.chassis_movement_p.poll() is None:
                     print ("chassis_movement正常")
+                    good=True
                 else:
                     print ("chassis_movement 未正常運作 重起中...")
+                    good=False
                     self.chassis_movement_run()
+                    
 
                 if self.log_p.poll() is None:
                     print ("log正常")
+                    good=True
                 else:
                     print ("log 未正常運作 重起中...")
+                    good=False
                     self.log_run()
+                    
 
                 if self.tracking_sensor_p.poll() is None:
                     print ("正常")
+                    good=True
                 else:
                     print ("tracking_sensor 未正常運作 重起中...")
+                    good=False
                     self.tracking_sensor_run()
 
                 if self.sensor_p.poll() is None:
                     print ("sensor 正常")
+                    good=True
                 else:
                     print ("sensor 未正常運作 重起中...")
+                    good=False
                     self.sensor_run()
-
+                if good:
+                   GPIO.output(led1, GPIO.HIGH)
+                else:
+                   GPIO.output(led1, GPIO.LOW)    
                 # if self.gpio_p.poll() is None:
                 #     print ("gpio 正常")
                 # else:
