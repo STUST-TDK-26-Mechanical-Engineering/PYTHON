@@ -17,7 +17,7 @@ class Auto_Run():
         self.a2=31
         self.led1=15
         self.led2=33
-       
+        self.channel=32
 
         self.sleep_time = sleep_time
         self.chassis_movement = chassis_movement
@@ -152,7 +152,7 @@ class Auto_Run():
     def gpio_init(self):
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.res_b, GPIO.IN)
-        channel=32
+        
         # res_b=36
         
         GPIO.setup(self.a1, GPIO.IN)
@@ -160,7 +160,7 @@ class Auto_Run():
         GPIO.setup(self.led1, GPIO.OUT,initial=GPIO.HIGH)
         GPIO.setup(self.led2, GPIO.OUT,initial=GPIO.HIGH)
         time.sleep(1)
-        GPIO.setup(channel, GPIO.IN)
+        GPIO.setup(self.channel, GPIO.IN)
         GPIO.setup(self.a2, GPIO.IN)
     def chassis_movement_run(self):
         if self.chassis_ext == ".py":
