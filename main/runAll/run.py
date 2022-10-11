@@ -113,12 +113,8 @@ class Auto_Run():
                     good=False
                     self.sensor_run()
                 if good:
-                    GPIO.cleanup()
-                    self.gpio_init()
                     GPIO.output(self.led1, GPIO.HIGH)
                 else:
-                    GPIO.cleanup()
-                    self.gpio_init()
                     GPIO.output(self.led1, GPIO.LOW)    
                 # if self.gpio_p.poll() is None:
                 #     print ("gpio 正常")
@@ -159,8 +155,8 @@ class Auto_Run():
         
         GPIO.setup(self.a1, GPIO.IN)
         # GPIO.setup(res_b, GPIO.IN)
-        GPIO.setup(self.led1, GPIO.OUT,initial=GPIO.HIGH)
-        GPIO.setup(self.led2, GPIO.OUT,initial=GPIO.HIGH)
+        GPIO.setup(self.led1, GPIO.OUT)
+        GPIO.setup(self.led2, GPIO.OUT)
         time.sleep(1)
         GPIO.setup(self.channel, GPIO.IN)
         GPIO.setup(self.a2, GPIO.IN)
