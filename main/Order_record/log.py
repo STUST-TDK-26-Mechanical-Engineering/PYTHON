@@ -9,7 +9,11 @@ port = 1883
 topic = "/bot/log"
 client_id = f'log-{random.randint(0, 1000)}'
 File_log=log()
-
+mode_A="/home/r201/Documents/PYTHON/output_A.json"
+mode_A_RE="/home/r201/Documents"
+mode_B="/home/r201/Documents/PYTHON/output_B.json"
+mode_B_RE="/home/r201/Documents/PYTHON/output_B-RES.json" 
+        
 # 当代理响应订阅请求时被调用。
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
@@ -46,9 +50,18 @@ def on_message(client, userdata, msg):
         client.publish(topic="/bot/chassis", payload=msg, qos=2)
         File_log.online(m_in['X'],m_in['Y'],m_in['Z'],m_in['s'])
     elif(m_in['msg']=="log.play"):#啟動紀錄回放模式
-        data,id_len=File_log.read_file(0) 
+        if m_in['mode']=="A":
+            FILE=mode_A
+        elif m_in['mode']=="A_RE":
+            FILE=mode_A_RE
+        elif m_in['mode']=="B":
+            FILE=mode_B    
+        elif m_in['mode']=="B_RE":
+            FILE=mode_B_RE    
+        
+        data,id_len=File_log.read_file(0,FILE) 
         for x in range(1,id_len+1):
-            data,id_len=File_log.read_file(x)
+            data,id_len=File_log.read_file(x,FILE)
             data=data
             
             data_out=json.dumps(data) # encode object to JSON

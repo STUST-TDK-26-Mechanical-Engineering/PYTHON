@@ -21,8 +21,8 @@ class log:
         end = time.time()
 
         print("執行時間：%f 秒" % (end - start))
-    def read_file(self,id):
-        with open('./output.json') as f:
+    def read_file(self,id,FILE):
+        with open(FILE) as f:
             self.data = json.load(f)
         data=self.data[id-1][1]    
         return data,len(self.data)   

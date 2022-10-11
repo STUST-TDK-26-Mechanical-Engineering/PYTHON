@@ -69,11 +69,18 @@ class Auto_Run():
                     # GPIO.setmode(GPIO.BOARD)
                     # GPIO.setup(res_b, GPIO.IN)
                 if  GPIO.input(self.channel) and not self.mood:
+                    modeAB=GPIO.input(self.a2)
+                    if modeAB:
+                        self.connect_mqtt("A")
+                        print("執行A場地")
+                    else:
+                        self.connect_mqtt("B")  
+                        print("執行B場地")  
                     GPIO.cleanup()
                     self.gpio_init()
                     GPIO.output(self.led2, GPIO.HIGH)
                     GPIO.output(self.led1, GPIO.LOW)
-                    self.connect_mqtt()
+                    # self.connect_mqtt()
                     self.mood=True
                     time.sleep(3)
                 time.sleep(sleep_time )  #休息10分钟，判断程序状态
@@ -133,7 +140,7 @@ class Auto_Run():
             self.sensor_p.kill()
             self.gpio_p.kill()
             #self.p.kill()                   #检测到CTRL+C时，kill掉CMD中启动的exe或者jar程序
-    def connect_mqtt(self):#連接伺服器
+    def connect_mqtt(self,MODE):#連接伺服器
         def on_connect(client, userdata, flags, rc):
             if rc == 0:
                 print("Connected to MQTT Broker!")
@@ -146,7 +153,7 @@ class Auto_Run():
         client.on_connect = on_connect
         client.connect(broker, port)
         client.loop_start()
-        client.publish(topic="/bot/log", payload=json.dumps({"msg": "log.play"}), qos=0)
+        client.publish(topic="/bot/log", payload=json.dumps({"msg": "log.play","mode":MODE}), qos=0)
     def gpio_init(self):
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.res_b, GPIO.IN)
