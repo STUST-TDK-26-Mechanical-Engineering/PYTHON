@@ -61,7 +61,7 @@ class Auto_Run():
             GPIO.output(led2, GPIO.LOW)
             while 1:
                 
-                print("gpio:",GPIO.input(res_b))
+                print("gpio:",GPIO.input(res_b),GPIO.input(channel))
                 if GPIO.input(res_b):
                     print("重起中")
                     GPIO.output(led1, GPIO.LOW)
