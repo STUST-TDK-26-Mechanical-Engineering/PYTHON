@@ -36,7 +36,7 @@ class Auto_Run():
         self.log_run()
         self.tracking_sensor_run()
         self.sensor_run()
-        self.gpio_run()
+        # self.gpio_run()
         # self.run()                          #启动时先执行一次程序
 
         try:
