@@ -12,6 +12,7 @@ class Auto_Run():
         res_b=36
         self.GPIO_DATA=GPIO
         self.GPIO_DATA.setup(res_b, GPIO.IN)
+        self.GPIO_DATA.setmode(GPIO.BOARD)
         self.sleep_time = sleep_time
         self.chassis_movement = chassis_movement
         self.log=log
