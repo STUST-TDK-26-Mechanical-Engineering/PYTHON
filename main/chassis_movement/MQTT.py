@@ -2,7 +2,7 @@ from paho.mqtt import client as mqtt_client
 from chassis_movement import control 
 import random
 import time
-import threading
+import threading,os
 import json
 broker = 'r201_nx.local'
 port = 1883
@@ -36,10 +36,12 @@ def subscribe(client: mqtt_client):#訂閱
 
 def run():
    
-    
-    client = connect_mqtt()
-    subscribe(client)
-    client.loop_forever()
+    try:
+        client = connect_mqtt()
+        subscribe(client)
+        client.loop_forever()
+    except:
+        os._exit(0)    
 
 
 if __name__ == '__main__':

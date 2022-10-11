@@ -85,19 +85,21 @@ def on_message(client, userdata, msg):
 def on_log(client, obj, level, string):
     print("Log:" + string)
 def run():
-   client = mqtt_client.Client()
-   client.on_connect = on_connect
-   client.on_subscribe = on_subscribe
-   client.on_message = on_message
-   client.on_log = on_log
-   client.connect(host=broker, port=port, keepalive=6000)  # 订阅频道\
-   time.sleep(1)
-   client.subscribe(topic, 0)
-    #client.loop_start() 
-    # client = connect_mqtt()
-    # subscribe(client)
-   client.loop_forever()
+    try:    
+        client = mqtt_client.Client()
+        client.on_connect = on_connect
+        client.on_subscribe = on_subscribe
+        client.on_message = on_message
+        client.on_log = on_log
+        client.connect(host=broker, port=port, keepalive=6000)  # 订阅频道\
+        time.sleep(1)
+        client.subscribe(topic, 0)
+            #client.loop_start() 
+            # client = connect_mqtt()
+            # subscribe(client)
+        client.loop_forever()
 
-
+    except:
+        os._exit(0) 
 if __name__ == '__main__':
     run()
