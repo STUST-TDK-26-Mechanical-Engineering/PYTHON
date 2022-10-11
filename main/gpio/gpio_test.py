@@ -59,7 +59,8 @@ def run():
             if GPIO.input(channel):
                 go(client,GPIO,led1,led2)
                 time.sleep(5)
-                
+                GPIO.cleanup()
+                os._exit(0)
 
             client.loop_start()    
         # subscribe(client)
