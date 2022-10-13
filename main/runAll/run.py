@@ -73,23 +73,23 @@ class Auto_Run():
                     modeRES=GPIO.input(self.a2)
                     if modeAB:
                         if modeRES:
-                            print("執行A場地")
-                            time.sleep(3)
+                            # print("執行A場地")
+                            # time.sleep(1)
                             self.connect_mqtt("A")
                         else :
-                            print("執行A場地RES_未設定")
-                            time.sleep(3)
+                            # print("執行A場地RES_未設定")
+                            # time.sleep(1)
 
-                            # self.connect_mqtt("A")    
+                            self.connect_mqtt("A_RE")    
                         
                     else:
                         if modeRES:
-                            print("執行B場地") 
-                            time.sleep(3) 
+                            # print("執行B場地") 
+                            # time.sleep(1) 
                             self.connect_mqtt("B") 
                         else:
-                            print("執行B場地_res") 
-                            time.sleep(3) 
+                            # print("執行B場地_res") 
+                            # time.sleep(3) 
                             self.connect_mqtt("B_RE")    
                         
                     GPIO.cleanup()

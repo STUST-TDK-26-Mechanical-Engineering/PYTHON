@@ -10,7 +10,7 @@ topic = "/bot/log"
 client_id = f'log-{random.randint(0, 1000)}'
 File_log=log()
 mode_A="/home/r201/Documents/PYTHON/output_A.json"
-mode_A_RE="/home/r201/Documents"
+mode_A_RE="/home/r201/Documents/PYTHON/output_A_RES.json"
 mode_B="/home/r201/Documents/PYTHON/output_B.json"
 mode_B_RE="/home/r201/Documents/PYTHON/output_B-RES.json" 
         
