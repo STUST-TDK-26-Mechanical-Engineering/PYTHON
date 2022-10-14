@@ -1,5 +1,5 @@
 [  
-   [0,{"msg": "i2c.test","mode":"0x03","data":215,"S": 1}],
+   [0,{"msg": "i2c.test","mode":"0x03","data":250,"S": 1}],
    [0,{"msg": "i2c.test","mode":"0x04","data":50,"S": 1}],
    [1,{"msg": "log.play","X": 500,"Y": 0,"Z": 0,"S":2}],
    [4,{"msg": "i2c.teack","y_init":250,"z_init":500,"S":5}],
@@ -57,7 +57,8 @@
    [2,{"msg": "log.play","X": 0,"Y": 0,"Z":0,"S":0.5}],
    [5,{"msg": "log.play","X": -100,"Y": 0,"Z":0,"S":2}],
    [2,{"msg": "log.play","X": 0,"Y": 0,"Z":0,"S":0.5}],
-
+   
+   [0,{"msg": "i2c.test","mode":"0x03","data":250,"S": 0.5}],
    [0,{"msg": "i2c.test","mode":"0x04","data":80,"S": 1}],
    [0,{"msg": "i2c.test","mode":"0x02","S": 1}],
    [2,{"msg": "log.play","X": 0,"Y": 0,"Z":0,"S":0.5}],
